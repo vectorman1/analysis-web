@@ -2,8 +2,16 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const routes = {
+	symbols: {
+		getPaged: 'symbols/paged',
+	},
+};
+
 export const environment = {
-  production: false
+	production: false,
+	apiBaseUrl: 'http://localhost:7070/api/v1/',
+	routes,
 };
 
 /*

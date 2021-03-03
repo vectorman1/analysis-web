@@ -1,0 +1,26 @@
+
+.full-height {
+	height: 95%;
+}
+
+table{
+	width: 100%;
+	overflow: auto !important;
+}
+
+.table-container {
+	overflow: auto;
+	max-height: calc(100vh - 210px);
+	height: calc(100vh - 210px);
+}
+
+.padded {
+	margin: 20px;
+}
+
+.spinner-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: calc(100% - 56px);
+}
