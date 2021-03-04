@@ -14,3 +14,7 @@ export const selectSymbolList = createSelector(
 	selectSymbol,
 	(state: SymbolState) => state.symbols
 );
+export const selectSymbolDetails = createSelector(
+	selectSymbol,
+	(state: SymbolState) => state.symbolDetails
+);

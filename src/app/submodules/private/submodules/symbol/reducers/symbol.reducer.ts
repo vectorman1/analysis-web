@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { ServerItem } from '@app/root/models/server-item.model';
 import { TradingSymbol } from '@app/shared/models/tradingSymbol';
 import {
@@ -11,39 +11,41 @@ import {
 	serverCallStart,
 	serverCallSuccess,
 } from '@app/root/server-calls.helpers';
-import { PagedRequest } from '@app/shared/models/request';
-import { ServerError } from '@app/shared/models/server-error';
 import { PagedList } from '@app/root/models/paged-list';
+import {
+	symbolsGetDetails,
+	symbolsGetDetailsFailure,
+	symbolsGetDetailsSuccess,
+} from '@app/submodules/symbol/actions/symbol-get-details.actions';
+import { SymbolDetails } from '@app/shared/models/symbol-details';
 
 export const symbolFeatureKey = 'symbol';
 
 export interface SymbolState {
 	symbols: ServerItem<PagedList<TradingSymbol>>;
+	symbolDetails: ServerItem<SymbolDetails>;
 }
 
 export const initialState: SymbolState = <SymbolState>{};
 
 export const reducer = createReducer(
 	initialState,
-	on(symbolsGetPaged, (state, { filter }) =>
-		serverCallStart(
-			state,
-			{ payload: new PagedRequest(filter) },
-			() => state.symbols
-		)
+	on(symbolsGetPaged, (state, req) =>
+		serverCallStart(state, { payload: req }, () => state.symbols)
 	),
-	on(symbolsGetPagedSuccess, (state, { totalItems, items }) => {
-		return serverCallSuccess(
-			state,
-			{ payload: { items: items, totalItems: totalItems } },
-			() => state.symbols
-		);
-	}),
-	on(symbolsGetPagedFailure, (state, { details, code, message }) =>
-		serverCallFailure(
-			state,
-			{ payload: new ServerError(code, message, details) },
-			() => state.symbols
-		)
+	on(symbolsGetPagedSuccess, (state, res) =>
+		serverCallSuccess(state, { payload: res }, () => state.symbols)
+	),
+	on(symbolsGetPagedFailure, (state, err) =>
+		serverCallFailure(state, { payload: err }, () => state.symbols)
+	),
+	on(symbolsGetDetails, (state, req) =>
+		serverCallStart(state, { payload: req }, () => state.symbolDetails)
+	),
+	on(symbolsGetDetailsSuccess, (state, res) =>
+		serverCallSuccess(state, { payload: res }, () => state.symbolDetails)
+	),
+	on(symbolsGetDetailsFailure, (state, err) =>
+		serverCallFailure(state, { payload: err }, () => state.symbolDetails)
 	)
 );

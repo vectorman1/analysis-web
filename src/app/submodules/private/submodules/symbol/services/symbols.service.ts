@@ -8,6 +8,7 @@ import {
 } from '@app/shared/models/tradingSymbol';
 import { API_ROUTES } from '@app/root/constants/route.constants';
 import { PagedList } from '@app/root/models/paged-list';
+import { SymbolDetails } from '@app/shared/models/symbol-details';
 
 @Injectable({
 	providedIn: 'root',
@@ -22,5 +23,9 @@ export class SymbolsService {
 			API_ROUTES.SYMBOL.PAGED,
 			body
 		);
+	}
+
+	getDetails(uuid: string): Observable<SymbolDetails> {
+		return this.http.get<SymbolDetails>(API_ROUTES.SYMBOL.DETAILS(uuid));
 	}
 }

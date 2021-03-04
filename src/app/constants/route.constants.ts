@@ -8,6 +8,7 @@ export const API_ROUTES = {
 	},
 	SYMBOL: {
 		PAGED: setRoute('symbols/paged'),
+		DETAILS: (uuid: string) => setRoute(`symbols/${uuid}/details`),
 	},
 	USER: {
 		LOGIN: setRoute('users/login'),
@@ -25,5 +26,15 @@ export const PRIVATE_ROUTES = {
 	SYMBOL: {
 		BASE: 'symbol',
 		HOME: 'symbol/home',
+	},
+};
+
+export const PUBLIC_ROUTES = {
+	BASE: 'public',
+
+	USER: {
+		BASE: 'user',
+		LOGIN: 'user/login',
+		REGISTER: 'user/register',
 	},
 };

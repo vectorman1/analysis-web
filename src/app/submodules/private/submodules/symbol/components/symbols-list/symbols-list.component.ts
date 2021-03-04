@@ -1,16 +1,26 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { TradingSymbolsListDataSource } from './trading-symbols-list-data-source';
 import { Store } from '@ngrx/store';
 import { TradingSymbol } from '@app/shared/models/tradingSymbol';
 
 import { merge, Subscription } from 'rxjs';
-import { filter, map, subscribeOn, tap } from 'rxjs/operators';
+import {
+	exhaustMap,
+	filter,
+	map,
+	mergeMap,
+	subscribeOn,
+	switchMap,
+	tap,
+} from 'rxjs/operators';
 import { symbolsGetPaged } from '@app/submodules/symbol/actions/symbol-get-paged.actions';
 import { SymbolState } from '@app/submodules/symbol/reducers/symbol.reducer';
 import { AppState } from '@app/root/reducers';
+import { PagedRequest } from '@app/shared/models/request';
+import { isNullOrUndefined } from '@app/root/utils';
 
 @Component({
 	selector: 'app-symbols-list',
@@ -25,6 +35,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 	@ViewChild(MatTable)
 	table!: MatTable<TradingSymbol>;
 	dataSource!: TradingSymbolsListDataSource;
+	req!: PagedRequest;
 
 	constructor(private store: Store<AppState>) {}
 
@@ -33,15 +44,26 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 		'isin',
 		'identifier',
 		'name',
+		'currency',
 		'minimum_order_quantity',
 		'market_name',
 		'market_hours_gmt',
+		'created_at',
 	];
 
 	ngOnInit(): void {
 		this.dataSource = new TradingSymbolsListDataSource(this.store);
 
-		this.dataSource.loadSymbols(1, 20, 'identifier', true);
+		this.req = {
+			filter: {
+				pageNumber: 1,
+				pageSize: 20,
+				ascending: true,
+				order: 'identifier',
+			},
+		};
+
+		this.dataSource.loadSymbols(this.req);
 	}
 
 	ngOnDestroy(): void {}
@@ -50,19 +72,29 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
 
-		this.paginator.page.pipe(tap(() => this.loadSymbolsPage())).subscribe();
+		this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
 		merge(this.sort.sortChange, this.paginator.page)
-			.pipe(tap(() => this.loadSymbolsPage()))
+			.pipe(
+				tap(() => {
+					this.loadSymbolsPage();
+				})
+			)
 			.subscribe();
 	}
 
 	loadSymbolsPage() {
-		this.dataSource.loadSymbols(
-			this.paginator.pageIndex + 1,
-			this.paginator.pageSize,
-			this.sort.active ? this.sort.active : 'identifier',
-			!!this.sort.direction ? this.sort.direction === 'asc' : true
-		);
+		this.req = {
+			filter: {
+				pageNumber: this.paginator.pageIndex + 1,
+				pageSize: this.paginator.pageSize,
+				order: this.sort.active ? this.sort.active : 'uuid',
+				ascending: !!this.sort.direction
+					? this.sort.direction === 'asc'
+					: true,
+			},
+		};
+
+		this.dataSource.loadSymbols(this.req);
 	}
 }

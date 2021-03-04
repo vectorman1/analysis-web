@@ -12,3 +12,11 @@ export class Filter {
 	order!: string;
 	ascending!: boolean;
 }
+
+export class SymbolDetailsRequest {
+	constructor(uuid: string) {
+		this.uuid = uuid;
+	}
+
+	uuid!: string;
+}

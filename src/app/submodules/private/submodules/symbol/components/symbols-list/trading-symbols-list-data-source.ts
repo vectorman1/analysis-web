@@ -23,6 +23,7 @@ import {
 	mapValue,
 } from '@app/root/observable.helpers';
 import { PagedList } from '@app/root/models/paged-list';
+import { ServerError } from '@app/shared/models/server-error';
 
 /**
  * Data source for the SymbolsList view. This class should
@@ -30,6 +31,7 @@ import { PagedList } from '@app/root/models/paged-list';
  * (including sorting, pagination, and filtering).
  */
 export class TradingSymbolsListDataSource extends DataSource<TradingSymbol> {
+	subscriptions = Array<Subscription>();
 	symbolsSubject = new BehaviorSubject<TradingSymbol[]>([]);
 	loadingSubject = new BehaviorSubject<boolean>(false);
 	totalItemsSubject = new BehaviorSubject<number>(0);
@@ -44,15 +46,17 @@ export class TradingSymbolsListDataSource extends DataSource<TradingSymbol> {
 		super();
 
 		this.symbols$ = this.store.select(fromSymbols.selectSymbolList);
-		this.symbols$.pipe(mapIsLoading).subscribe(this.loadingSubject);
-		this.symbols$
-			.pipe(mapValue)
-			.pipe(mapPageItems)
-			.subscribe(this.symbolsSubject);
-		this.symbols$
-			.pipe(mapValue)
-			.pipe(mapTotalItems)
-			.subscribe(this.totalItemsSubject);
+		this.subscriptions.push(
+			this.symbols$.pipe(mapIsLoading).subscribe(this.loadingSubject),
+			this.symbols$
+				.pipe(mapValue)
+				.pipe(mapPageItems)
+				.subscribe(this.symbolsSubject),
+			this.symbols$
+				.pipe(mapValue)
+				.pipe(mapTotalItems)
+				.subscribe(this.totalItemsSubject)
+		);
 	}
 
 	/**
@@ -79,26 +83,13 @@ export class TradingSymbolsListDataSource extends DataSource<TradingSymbol> {
 	disconnect(): void {
 		this.symbolsSubject.complete();
 		this.loadingSubject.complete();
+		this.subscriptions.forEach((s) => s.unsubscribe());
 	}
 
-	loadSymbols(
-		pageNumber: number,
-		pageSize: number,
-		order: string,
-		ascending: boolean
-	) {
+	loadSymbols(req: PagedRequest) {
 		this.loadingSubject.next(true);
 		this.symbolsSubject.next([]);
 
-		this.store.dispatch(
-			symbolsGetPaged(
-				new PagedRequest({
-					pageNumber: pageNumber,
-					pageSize: pageSize,
-					order: order,
-					ascending: ascending,
-				})
-			)
-		);
+		this.store.dispatch(symbolsGetPaged(req));
 	}
 }

@@ -1,0 +1,3 @@
+export const APP_CONSTANTS = {
+	REQUEST_THROTTLE_MS: 1000,
+};

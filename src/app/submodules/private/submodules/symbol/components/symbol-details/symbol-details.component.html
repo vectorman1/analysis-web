@@ -1,1 +1,70 @@
-<p>symbol-details works!</p>
+<div class="padded">
+	<div class="page-header">
+		<button mat-icon-button class="back-button" [routerLink]="['/private/symbol']"><mat-icon>arrow_back</mat-icon></button>
+		<span class="mat-h1">Details</span>
+	</div>
+
+	<mat-card class="symbol-details">
+		<mat-card-header>
+			<mat-card-title>
+				<div class="identifier-container">
+					<ngx-skeleton-loader *ngIf="(isLoadingSubject | async)" count="1" [theme]="{
+						'background-color': '#303030',
+						'height': '20px',
+						'margin-bottom': '0px'
+					}">
+					</ngx-skeleton-loader>
+					{{(symbolDetailsSubject | async)?.symbol?.identifier }}
+				</div>
+			</mat-card-title>
+			<mat-card-subtitle>
+				<div class="isin-container">
+					<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+						'background-color': '#303030',
+						'height': '16px',
+						'margin-bottom': '0px'
+					}">
+					</ngx-skeleton-loader>
+					{{(symbolDetailsSubject | async)?.symbol?.name }}
+				</div>
+				<div class="market-container">
+					<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+						'background-color': '#303030',
+						'height': '16px',
+						'margin-bottom': '0px'
+					}" >
+					</ngx-skeleton-loader>
+					{{(symbolDetailsSubject | async)?.symbol?.marketName }}
+				</div>
+			</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<mat-tab-group mat-stretch-tabs>
+				<mat-tab>
+					<ng-template mat-tab-label>
+						<mat-icon class="example-tab-icon">thumb_up</mat-icon>
+						First
+					</ng-template>
+					Content 1
+				</mat-tab>
+
+				<mat-tab>
+					<ng-template mat-tab-label>
+						<mat-icon class="example-tab-icon">text_snipped</mat-icon>
+						Overview
+					</ng-template>
+					Content 2
+				</mat-tab>
+
+				<mat-tab>
+					<ng-template mat-tab-label>
+						<mat-icon class="example-tab-icon">thumb_up</mat-icon>
+						Third
+					</ng-template>
+
+					Content 3
+				</mat-tab>
+			</mat-tab-group>
+		</mat-card-content>
+	</mat-card>
+</div>

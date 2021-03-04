@@ -12,6 +12,15 @@ import { SymbolEffects } from './effects/symbol.effects';
 import { SymbolsService } from '@app/submodules/symbol/services/symbols.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SymbolDetailsComponent } from '@app/submodules/symbol/components/symbol-details/symbol-details.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
 	declarations: [SymbolsListComponent, SymbolDetailsComponent],
@@ -23,6 +32,13 @@ import { SymbolDetailsComponent } from '@app/submodules/symbol/components/symbol
 		MatSortModule,
 		MatProgressSpinnerModule,
 		EffectsModule.forFeature([SymbolEffects]),
+		MatCardModule,
+		MatDividerModule,
+		NgxSkeletonLoaderModule,
+		MatButtonModule,
+		MatIconModule,
+		MatTabsModule,
+		MatGridListModule,
 	],
 	providers: [SymbolsService],
 })

@@ -8,6 +8,8 @@ import { PrivateRoutingModule } from '@app/private/private-routing.module';
 import { PrivateComponent } from '@app/private/private.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
 	declarations: [PrivateComponent],

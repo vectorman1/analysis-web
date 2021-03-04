@@ -1,0 +1,37 @@
+@import '~@angular/material/theming';
+
+$background: map-get($mat-dark-theme-background, background);
+
+.padded {
+	padding: 20px;
+	height: calc(100vh - 220px);
+}
+
+.identifier-container {
+	width: 90px;
+}
+
+.isin-container {
+	width: 160px;
+}
+
+.market-container {
+	width: 160px;
+	min-height: 20px;
+}
+
+.symbol-details {
+	height: 100%;
+}
+.back-button {
+	margin-bottom: 16px;
+}
+
+.symbol-details-content {
+	padding-top: 16px;
+}
+
+.page-header {
+	display: flex;
+	align-items: center;
+}
