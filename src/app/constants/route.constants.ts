@@ -17,24 +17,30 @@ export const API_ROUTES = {
 };
 
 export const PRIVATE_ROUTES = {
-	BASE: 'private',
+	BASE: `private`,
 
 	DASHBOARD: {
-		BASE: 'dashboard',
-		HOME: 'dashboard/home',
+		BASE: `dashboard`,
+		HOME: `home`,
 	},
 	SYMBOL: {
-		BASE: 'symbol',
-		HOME: 'symbol/home',
+		BASE: `symbol`,
+		LIST: `list`,
+		DETAILS: `:uuid/details`,
 	},
 };
 
 export const PUBLIC_ROUTES = {
-	BASE: 'public',
+	BASE: `public`,
+
+	HOME: {
+		BASE: `home`,
+		LANDING: `landing`,
+	},
 
 	USER: {
-		BASE: 'user',
-		LOGIN: 'user/login',
-		REGISTER: 'user/register',
+		BASE: `user`,
+		LOGIN: `login`,
+		REGISTER: `register`,
 	},
 };

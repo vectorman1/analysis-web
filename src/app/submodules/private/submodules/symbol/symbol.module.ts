@@ -21,9 +21,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
+import { SymbolComponent } from '@app/submodules/symbol/symbol.component';
 
 @NgModule({
-	declarations: [SymbolsListComponent, SymbolDetailsComponent],
+	declarations: [
+		SymbolsListComponent,
+		SymbolDetailsComponent,
+		SymbolComponent,
+	],
 	imports: [
 		CommonModule,
 		SymbolRoutingModule,
@@ -39,6 +46,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 		MatIconModule,
 		MatTabsModule,
 		MatGridListModule,
+		NgxEchartsModule.forRoot({
+			echarts,
+		}),
 	],
 	providers: [SymbolsService],
 })

@@ -1,5 +1,5 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
-import * as fromIdentity from '@app/identity/reducers/identity.reducer';
+import * as fromUser from '@app/public/submodules/user/reducers/user.reducer';
 import * as fromSymbol from '@app/submodules/symbol/reducers/symbol.reducer';
 
 import { environment } from '@env/environment';
@@ -7,12 +7,12 @@ import { environment } from '@env/environment';
 export const stateFeatureKey = 'state';
 
 export interface AppState {
-	identity: fromIdentity.IdentityState;
+	user: fromUser.UserState;
 	symbol: fromSymbol.SymbolState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-	identity: fromIdentity.reducer,
+	user: fromUser.reducer,
 	symbol: fromSymbol.reducer,
 };
 

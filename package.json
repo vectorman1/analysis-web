@@ -24,8 +24,11 @@
     "@ngrx/effects": "^11.0.1",
     "@ngrx/store": "^11.0.1",
     "@ngrx/store-devtools": "^11.0.1",
+    "echarts": "^5.0.2",
     "ngrx": "0.0.1-security",
+    "ngx-echarts": "^6.0.1",
     "ngx-skeleton-loader": "^2.9.1",
+    "resize-observer-polyfill": "^1.5.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

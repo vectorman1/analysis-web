@@ -7,9 +7,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { DashboardRootComponent } from '@app/private/submodules/dashboard/components/dashboard-root/dashboard-root.component';
+import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
-	declarations: [DashboardRootComponent],
+	declarations: [DashboardRootComponent, DashboardComponent],
 	imports: [
 		CommonModule,
 		DashboardRoutingModule,

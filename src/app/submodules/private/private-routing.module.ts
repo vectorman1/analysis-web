@@ -1,26 +1,27 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PrivateComponent } from '@app/private/private.component';
+import { PRIVATE_ROUTES } from '@app/root/constants/route.constants';
 
 const routes: Routes = [
 	{
-		path: 'private',
+		path: '',
 		component: PrivateComponent,
 		children: [
 			{
 				path: '',
-				redirectTo: 'dashboard',
+				redirectTo: PRIVATE_ROUTES.DASHBOARD.BASE,
 				pathMatch: 'full',
 			},
 			{
-				path: 'dashboard',
+				path: PRIVATE_ROUTES.DASHBOARD.BASE,
 				loadChildren: () =>
 					import('./submodules/dashboard/dashboard.module').then(
 						(m) => m.DashboardModule
 					),
 			},
 			{
-				path: 'symbol',
+				path: PRIVATE_ROUTES.SYMBOL.BASE,
 				loadChildren: () =>
 					import('./submodules/symbol/symbol.module').then(
 						(m) => m.SymbolModule

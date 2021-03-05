@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
 	declarations: [PrivateComponent],
@@ -22,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		MatIconModule,
 		HttpClientModule,
 		MatButtonModule,
+		MatGridListModule,
 	],
 	exports: [PrivateComponent],
 })

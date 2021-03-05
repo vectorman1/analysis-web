@@ -1,70 +1,85 @@
-<div class="padded">
-	<div class="page-header">
-		<button mat-icon-button class="back-button" [routerLink]="['/private/symbol']"><mat-icon>arrow_back</mat-icon></button>
-		<span class="mat-h1">Details</span>
-	</div>
-
-	<mat-card class="symbol-details">
-		<mat-card-header>
-			<mat-card-title>
-				<div class="identifier-container">
-					<ngx-skeleton-loader *ngIf="(isLoadingSubject | async)" count="1" [theme]="{
-						'background-color': '#303030',
-						'height': '20px',
-						'margin-bottom': '0px'
-					}">
-					</ngx-skeleton-loader>
-					{{(symbolDetailsSubject | async)?.symbol?.identifier }}
-				</div>
-			</mat-card-title>
-			<mat-card-subtitle>
-				<div class="isin-container">
-					<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
-						'background-color': '#303030',
-						'height': '16px',
-						'margin-bottom': '0px'
-					}">
-					</ngx-skeleton-loader>
-					{{(symbolDetailsSubject | async)?.symbol?.name }}
-				</div>
-				<div class="market-container">
-					<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
-						'background-color': '#303030',
-						'height': '16px',
-						'margin-bottom': '0px'
-					}" >
-					</ngx-skeleton-loader>
-					{{(symbolDetailsSubject | async)?.symbol?.marketName }}
-				</div>
-			</mat-card-subtitle>
-		</mat-card-header>
-		<mat-card-content>
-			<mat-tab-group mat-stretch-tabs>
-				<mat-tab>
-					<ng-template mat-tab-label>
-						<mat-icon class="example-tab-icon">thumb_up</mat-icon>
-						First
-					</ng-template>
-					Content 1
-				</mat-tab>
-
-				<mat-tab>
-					<ng-template mat-tab-label>
-						<mat-icon class="example-tab-icon">text_snipped</mat-icon>
-						Overview
-					</ng-template>
-					Content 2
-				</mat-tab>
-
-				<mat-tab>
-					<ng-template mat-tab-label>
-						<mat-icon class="example-tab-icon">thumb_up</mat-icon>
-						Third
-					</ng-template>
-
-					Content 3
-				</mat-tab>
-			</mat-tab-group>
-		</mat-card-content>
-	</mat-card>
+<div class="page-header">
+	<button mat-icon-button class="back-button" [routerLink]="['/private/symbol']"><mat-icon>arrow_back</mat-icon></button>
+	<span class="mat-h1">Details</span>
 </div>
+
+<mat-card class="symbol-details">
+	<mat-card-header>
+		<mat-card-title>
+			<div class="identifier-container">
+				<ngx-skeleton-loader *ngIf="(isLoadingSubject | async)" count="1" [theme]="{
+					'background-color': '#303030',
+					'height': '20px',
+					'margin-bottom': '0px'
+				}">
+				</ngx-skeleton-loader>
+				{{(symbolDetailsSubject | async)?.symbol?.identifier }}
+			</div>
+		</mat-card-title>
+		<mat-card-subtitle>
+			<div class="isin-container">
+				<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+					'background-color': '#303030',
+					'height': '16px',
+					'margin-bottom': '0px'
+				}">
+				</ngx-skeleton-loader>
+				{{(symbolDetailsSubject | async)?.symbol?.name }}
+			</div>
+			<div class="market-container">
+				<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+					'background-color': '#303030',
+					'height': '16px',
+					'margin-bottom': '0px'
+				}" >
+				</ngx-skeleton-loader>
+				{{(symbolDetailsSubject | async)?.symbol?.marketName }}
+			</div>
+		</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-content class="symbol-details-content">
+		<mat-tab-group mat-stretch-tabs>
+			<mat-tab>
+				<ng-template mat-tab-label>
+					<mat-icon class="tab-icon">folder_open</mat-icon>
+					Overview
+				</ng-template>
+				<mat-grid-list cols="4" rowHeight="1:1">
+					<mat-grid-tile>
+						<div class="left-column-container">
+							<h3 class="mat-h3">Description</h3>
+							<p>
+								<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="5" [theme]="{
+									'background-color': '#303030',
+									'height': '16px',
+									'margin-bottom': '0px'
+								}" >
+								</ngx-skeleton-loader>
+
+								{{(symbolDetailsSubject | async)?.details?.description }}
+							</p>
+						</div>
+					</mat-grid-tile>
+					<mat-grid-tile>2</mat-grid-tile>
+				</mat-grid-list>
+			</mat-tab>
+
+			<mat-tab>
+				<ng-template mat-tab-label>
+					<mat-icon class="tab-icon">category</mat-icon>
+					Fundamentals
+				</ng-template>
+				Content 2
+			</mat-tab>
+
+			<mat-tab>
+				<ng-template mat-tab-label>
+					<mat-icon class="tab-icon">insert_chart_outlined</mat-icon>
+					Price Action
+				</ng-template>
+				<div echarts [options]="priceActionChartOptions" class="price-action-chart"></div>
+			</mat-tab>
+		</mat-tab-group>
+	</mat-card-content>
+</mat-card>
+

@@ -1,0 +1,28 @@
+@import "~@angular/material/theming";
+
+.login-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-card {
+	min-height: 250px;
+	min-width: 350px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.login-actions {
+	text-align: right;
+}

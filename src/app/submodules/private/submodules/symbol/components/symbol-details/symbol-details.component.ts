@@ -17,6 +17,10 @@ import { tap } from 'rxjs/operators';
 	styleUrls: ['./symbol-details.component.scss'],
 })
 export class SymbolDetailsComponent implements OnInit {
+	upColor = '#00da3c';
+	downColor = '#ec0000';
+
+	priceActionChartOptions: any;
 	subscriptions = Array<Subscription>();
 	symbolDetails$: Observable<ServerItem<SymbolDetails>>;
 
@@ -37,6 +41,8 @@ export class SymbolDetailsComponent implements OnInit {
 		);
 	}
 	uuid!: string;
+
+	setChartOptions() {}
 
 	ngOnInit(): void {
 		this.uuid = this.route.snapshot.params['uuid'];
