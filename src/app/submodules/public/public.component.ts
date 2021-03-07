@@ -1,15 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { AppState } from '@app/root/reducers';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { userLogout } from '@app/public/submodules/user/actions/user-logout.actions';
+import { selectUserLogin } from '@app/public/submodules/user/selectors/user.selectors';
+import { mapIsSuccess } from '@app/root/observable.helpers';
+import { Router } from '@angular/router';
+import { userLoginSuccess } from '@app/public/submodules/user/actions/user-login.actions';
+import { UserService } from '@app/public/submodules/user/services/user.service';
+import { JwtService } from '@app/public/submodules/user/services/jwt.service';
 
 @Component({
-  selector: 'app-public',
-  templateUrl: './public.component.html',
-  styleUrls: ['./public.component.scss']
+	selector: 'app-public',
+	templateUrl: './public.component.html',
+	styleUrls: ['./public.component.scss'],
+	host: {
+		class: 'flex',
+	},
 })
 export class PublicComponent implements OnInit {
+	isLoggedIn$: Observable<boolean>;
 
-  constructor() { }
+	constructor(private store: Store<AppState>) {
+		this.isLoggedIn$ = this.store
+			.select(selectUserLogin)
+			.pipe(mapIsSuccess);
+	}
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {}
 
+	logout() {
+		this.store.dispatch(userLogout());
+	}
 }

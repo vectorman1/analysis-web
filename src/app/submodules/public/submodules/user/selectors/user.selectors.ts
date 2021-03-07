@@ -9,5 +9,5 @@ const selectUser = createFeatureSelector<AppState, UserState>(userFeatureKey);
 
 export const selectUserLogin = createSelector(
 	selectUser,
-	(state: UserState) => state.login
+	(state: UserState) => state.identity
 );

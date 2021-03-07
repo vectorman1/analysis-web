@@ -17,6 +17,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './effects/user.effects';
 import { UserService } from '@app/public/submodules/user/services/user.service';
+import { JwtService } from '@app/public/submodules/user/services/jwt.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { SharedModule } from '@app/shared/shared.module';
+
 @NgModule({
 	declarations: [LoginComponent, RegisterComponent, UserComponent],
 	imports: [
@@ -32,7 +36,9 @@ import { UserService } from '@app/public/submodules/user/services/user.service';
 		MatDividerModule,
 		MatCheckboxModule,
 		EffectsModule.forFeature([UserEffects]),
+		FlexLayoutModule,
+		SharedModule,
 	],
-	providers: [UserService],
+	providers: [UserService, JwtService],
 })
 export class UserModule {}

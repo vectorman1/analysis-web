@@ -15,15 +15,11 @@
 	top: 0;
 	z-index: 1;
 }
-.private-content {
-	display: flex;
-	flex-direction: column;
-	max-height: 100vh;
-}
-.private-container {
-	padding: 16px;
-}
 
 .header {
 	min-height: 64px;
+}
+
+.menu-icon {
+	margin-right: 8px;
 }

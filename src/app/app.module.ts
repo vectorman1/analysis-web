@@ -15,6 +15,11 @@ import { reducers } from '@app/root/reducers';
 import * as fromState from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { UserService } from '@app/public/submodules/user/services/user.service';
+import { JwtService } from '@app/public/submodules/user/services/jwt.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorToastInterceptor } from '@app/root/interceptors/error-toast.interceptor';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -27,6 +32,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 		MatListModule,
 		MatIconModule,
 		PrivateModule,
+		ToastrModule.forRoot(),
 		StoreModule.forRoot(reducers, {
 			runtimeChecks: {
 				strictStateImmutability: true,
@@ -38,7 +44,15 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 		}),
 		EffectsModule.forRoot(),
 	],
-	providers: [],
+	providers: [
+		UserService,
+		JwtService,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorToastInterceptor,
+			multi: true,
+		},
+	],
 	bootstrap: [AppComponent],
 	exports: [],
 })

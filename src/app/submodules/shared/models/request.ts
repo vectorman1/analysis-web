@@ -11,6 +11,7 @@ export class Filter {
 	pageNumber!: number;
 	order!: string;
 	ascending!: boolean;
+	text!: string;
 }
 
 export class SymbolDetailsRequest {

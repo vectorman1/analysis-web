@@ -6,6 +6,8 @@ html,
 body {
 	height: 100%;
 	max-height: 100%;
+	width: 100%;
+	max-width: 100%;
 	background-color: map-get($mat-dark-theme-background, background);
 }
 
@@ -14,3 +16,18 @@ body {
 	margin: 0;
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.mat-loading .mat-button-wrapper {
+	visibility: hidden;
+}
+
+.mat-loading .mat-progress-spinner {
+	position: absolute;
+	top: calc(50% - 10px);
+	left: calc(50% - 10px);
+}
+
+.flex {
+	flex: 1;
+}
+

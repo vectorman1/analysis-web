@@ -15,6 +15,9 @@ import { tap } from 'rxjs/operators';
 	selector: 'app-symbol-details',
 	templateUrl: './symbol-details.component.html',
 	styleUrls: ['./symbol-details.component.scss'],
+	host: {
+		class: 'flex',
+	},
 })
 export class SymbolDetailsComponent implements OnInit {
 	upColor = '#00da3c';

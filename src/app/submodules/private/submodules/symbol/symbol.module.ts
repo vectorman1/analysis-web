@@ -24,12 +24,19 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { SymbolComponent } from '@app/submodules/symbol/symbol.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatListModule } from '@angular/material/list';
+import { SymbolPropertyComponent } from './components/symbol-property/symbol-property.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
 		SymbolsListComponent,
 		SymbolDetailsComponent,
 		SymbolComponent,
+		SymbolPropertyComponent,
 	],
 	imports: [
 		CommonModule,
@@ -49,6 +56,11 @@ import { SymbolComponent } from '@app/submodules/symbol/symbol.component';
 		NgxEchartsModule.forRoot({
 			echarts,
 		}),
+		FlexLayoutModule,
+		MatListModule,
+		MatFormFieldModule,
+		MatInputModule,
+		FormsModule,
 	],
 	providers: [SymbolsService],
 })

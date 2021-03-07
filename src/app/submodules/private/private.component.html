@@ -1,5 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
 	<mat-sidenav
+		fxLayout="column"
 		#drawer
 		class="sidenav"
 		fixedInViewport
@@ -9,27 +10,27 @@
 	>
 		<mat-toolbar>Menu</mat-toolbar>
 		<mat-nav-list>
-			<a mat-list-item href="#" [routerLink]="['./dashboard']">Dashboard</a>
-			<a mat-list-item href="#" [routerLink]="['./symbol']">Symbols</a>
-			<a mat-list-item href="#" [routerLink]="['./account']">Account</a>
+			<a mat-list-item href="#" [routerLink]="'/public'"><mat-icon class="menu-icon">home</mat-icon> Home</a>
+			<a mat-list-item href="#" [routerLink]="['./dashboard']"><mat-icon class="menu-icon">dashboard</mat-icon> Dashboard</a>
+			<a mat-list-item href="#" [routerLink]="['./symbol']"><mat-icon class="menu-icon">list</mat-icon> Symbols</a>
+			<a mat-list-item href="#" [routerLink]="['./account']"><mat-icon class="menu-icon">person</mat-icon> Account</a>
+			<a mat-list-item href="#" (click)="logout()"><mat-icon class="menu-icon">logout</mat-icon> Logout</a>
 		</mat-nav-list>
 	</mat-sidenav>
-	<mat-sidenav-content class="full-height private-content">
-		<mat-toolbar color="primary" class="header">
-			<button
-				type="button"
-				aria-label="Toggle sidenav"
-				mat-icon-button
-				(click)="drawer.toggle()"
-				*ngIf="isHandset$ | async"
-			>
-				<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-			</button>
-			<span>analysis-web</span>
-		</mat-toolbar>
-		<div class="private-container">
-			<router-outlet></router-outlet>
-		</div>
-
+	<mat-sidenav-content
+		fxLayout="column" class="">
+			<mat-toolbar color="primary" class="header">
+				<button
+					type="button"
+					aria-label="Toggle sidenav"
+					mat-icon-button
+					(click)="drawer.toggle()"
+					*ngIf="isHandset$ | async"
+				>
+					<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+				</button>
+				<span>analysis-web</span>
+			</mat-toolbar>
+		<router-outlet></router-outlet>
 	</mat-sidenav-content>
 </mat-sidenav-container>

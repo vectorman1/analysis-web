@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { isNullOrUndefined } from '@app/root/utils';
 import { filter, map, startWith } from 'rxjs/operators';
 import { ServerItem, ServerItemBase } from '@app/root/models/server-item.model';
@@ -26,6 +26,16 @@ export function mapIsLoading(
 		startWith(false)
 	);
 }
+
+export function mapIsNotLoading(
+	source$: Observable<ServerItemBase>
+): Observable<boolean> {
+	return source$.pipe(
+		safeMap((x) => !x.isLoading),
+		startWith(false)
+	);
+}
+
 export const mapIsSuccess = safeMap<ServerItemBase, boolean>(
 	(x) => x.isSuccess
 );

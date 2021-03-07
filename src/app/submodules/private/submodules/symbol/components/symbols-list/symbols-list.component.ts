@@ -26,6 +26,9 @@ import { isNullOrUndefined } from '@app/root/utils';
 	selector: 'app-symbols-list',
 	templateUrl: './symbols-list.component.html',
 	styleUrls: ['./symbols-list.component.scss'],
+	host: {
+		class: 'flex',
+	},
 })
 export class SymbolsListComponent implements AfterViewInit, OnInit {
 	@ViewChild(MatPaginator)
@@ -36,6 +39,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 	table!: MatTable<TradingSymbol>;
 	dataSource!: TradingSymbolsListDataSource;
 	req!: PagedRequest;
+	searchString!: string;
 
 	constructor(private store: Store<AppState>) {}
 
@@ -58,8 +62,9 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 			filter: {
 				pageNumber: 1,
 				pageSize: 20,
-				ascending: true,
-				order: 'identifier',
+				ascending: false,
+				order: 'created_at',
+				text: '',
 			},
 		};
 
@@ -92,9 +97,10 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 				ascending: !!this.sort.direction
 					? this.sort.direction === 'asc'
 					: true,
+				text: this.searchString,
 			},
 		};
-
+		console.log(this.searchString);
 		this.dataSource.loadSymbols(this.req);
 	}
 }

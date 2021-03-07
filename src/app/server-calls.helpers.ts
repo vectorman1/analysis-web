@@ -1,5 +1,5 @@
 import { isNullOrUndefined, propName } from '@app/root/utils';
-import { ServerItem, ServerItemBase } from '@app/root/models/server-item.model';
+import { ServerItemBase } from '@app/root/models/server-item.model';
 import { ServerError } from '@app/shared/models/server-error';
 
 export function serverCallStart(
@@ -34,11 +34,7 @@ export function serverCallSuccess(
 		return;
 	}
 
-	if (
-		!requireLoading ||
-		(!isNullOrUndefined(state[propertyName]) &&
-			state[propertyName].isLoading)
-	) {
+	if (!requireLoading || !isNullOrUndefined(state[propertyName])) {
 		return {
 			...state,
 			[propertyName]: <ServerItemBase>{

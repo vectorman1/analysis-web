@@ -18,7 +18,9 @@ import { AppState } from '@app/root/reducers';
 import { map, tap } from 'rxjs/operators';
 import {
 	mapIsLoading,
+	mapIsSuccess,
 	mapPageItems,
+	mapSendValue,
 	mapTotalItems,
 	mapValue,
 } from '@app/root/observable.helpers';
@@ -35,6 +37,7 @@ export class TradingSymbolsListDataSource extends DataSource<TradingSymbol> {
 	symbolsSubject = new BehaviorSubject<TradingSymbol[]>([]);
 	loadingSubject = new BehaviorSubject<boolean>(false);
 	totalItemsSubject = new BehaviorSubject<number>(0);
+	requestSubject = new BehaviorSubject<any>({});
 
 	private symbols$: Observable<ServerItem<PagedList<TradingSymbol>>>;
 

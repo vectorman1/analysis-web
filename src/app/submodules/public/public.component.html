@@ -1,4 +1,21 @@
-<mat-toolbar color="primary">
-	<span>analysis-web</span>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<div fxFlexFill fxLayout="column">
+	<div fxFlex="nogrow" fxLayout="row">
+		<mat-toolbar color="primary">
+			<h1 class="mat-h1" fxFlex="10">analysis-web</h1>
+			<div fxFlex fxLayout="row">
+				<div fxFlex fxLayout="row" fxLayoutAlign="start">
+					<a mat-button [routerLink]="'/public'">Home</a>
+					<a mat-button [routerLink]="'/private'">Platform</a>
+				</div>
+				<div fxFlex fxLayout="row" fxLayoutAlign="end">
+					<a mat-button [routerLink]="'/public/user/login'" *ngIf="!(isLoggedIn$ | async)">Login</a>
+					<a mat-button [routerLink]="'/public/user/register'" *ngIf="!(isLoggedIn$ | async)">Register</a>
+					<a mat-button (click)="logout()" *ngIf="(isLoggedIn$ | async)">Log out</a>
+				</div>
+			</div>
+		</mat-toolbar>
+	</div>
+	<div fxFlex fxLayout="row">
+		<router-outlet></router-outlet>
+	</div>
+</div>

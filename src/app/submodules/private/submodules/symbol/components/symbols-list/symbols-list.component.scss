@@ -1,20 +1,7 @@
-
-.full-height {
-	height: 95%;
-}
-
-.table{
-	width: 100%;
-}
-
 .table-container {
 	overflow-y: scroll;
 	max-height: calc(100vh - 300px);
 	height: calc(100vh - 300px);
-}
-
-.padded {
-	margin: 20px;
 }
 
 .spinner-container {
@@ -31,3 +18,13 @@
 .table-card-content {
 	padding-top: 16px;
 }
+
+.nm {
+	margin: 0;
+}
+
+.content {
+	padding: 16px;
+}
+
+

@@ -1,0 +1,12 @@
+<div mat-line>
+	<div fxLayout="row" fxLayoutAlign="start center">
+		<mat-icon>{{ icon }}</mat-icon> {{ name }}:
+	</div>
+</div>
+<div mat-line>
+	<p style="padding-top: 5px;" >
+		<ngx-skeleton-loader *ngIf="isLoading" count="10" [theme]="theme" >
+		</ngx-skeleton-loader>
+		{{ text }}
+	</p>
+</div>
