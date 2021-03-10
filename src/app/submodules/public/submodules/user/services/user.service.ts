@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { API_ROUTES } from '@app/root/constants/route.constants';
 import { LoginResponse } from '@app/public/submodules/user/models/login-response';
 import { LoginRequest } from '@app/public/submodules/user/models/login-request';
@@ -20,10 +20,8 @@ export class UserService {
 		return localStorage.getItem(APP_CONSTANTS.TOKEN_COOKIE);
 	}
 
-	logout(): Observable<boolean> {
-		let loggedOut = new Observable<boolean>();
+	logout() {
 		localStorage.removeItem(APP_CONSTANTS.TOKEN_COOKIE);
-		return loggedOut;
 	}
 
 	login(request: LoginRequest): Observable<LoginResponse> {

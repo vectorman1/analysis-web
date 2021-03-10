@@ -47,18 +47,13 @@ export class UserEffects {
 		)
 	);
 
-	userLogout$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(USER_LOGOUT),
-			exhaustMap(() =>
-				this.userService.logout().pipe(
-					map((res: boolean) => {
-						return userLogoutSuccess();
-					})
-				)
+	userLogout$ = createEffect(
+		() =>
+			this.actions$.pipe(
+				ofType(USER_LOGOUT),
+				tap(() => this.userService.logout())
 			),
-			catchError((err) => of(userLogoutFailure(err)))
-		)
+		{ dispatch: false }
 	);
 
 	constructor(
