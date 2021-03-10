@@ -7,7 +7,7 @@ import { environment } from '@env/environment';
 export const stateFeatureKey = 'state';
 
 export interface AppState {
-	user: fromUser.UserState;
+	user: fromUser.IdentityState;
 	symbol: fromSymbol.SymbolState;
 }
 
