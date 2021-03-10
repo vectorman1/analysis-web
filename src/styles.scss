@@ -17,6 +17,16 @@ body {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.error-toast {
+	background-color: map-get($mat-red, A700);
+	color: #fff
+}
+
+.success-toast {
+	background-color: map-get($mat-green, A700);
+	color: #fff;
+}
+
 .mat-loading .mat-button-wrapper {
 	visibility: hidden;
 }
@@ -29,5 +39,10 @@ body {
 
 .flex {
 	flex: 1;
+	max-height: 100%;
+	max-width: 100%;
+	height: 100%;
+	width: 100%;
+	align-items: flex-start;
 }
 

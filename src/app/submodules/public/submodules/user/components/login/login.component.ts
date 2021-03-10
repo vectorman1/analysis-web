@@ -5,14 +5,16 @@ import { Store } from '@ngrx/store';
 import { PRIVATE_ROUTES } from '@app/root/constants/route.constants';
 import { userLogin } from '@app/public/submodules/user/actions/user-login.actions';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { selectUserLogin } from '@app/public/submodules/user/selectors/user.selectors';
+import { selectUserIdentity } from '@app/public/submodules/user/selectors/user.selectors';
 import {
 	mapIsLoading,
 	mapIsNotLoading,
 	mapIsSuccess,
 } from '@app/root/observable.helpers';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { toastSuccess } from '@app/root/actions/toast.actions';
+import { APP_CONSTANTS } from '@app/root/constants/app.constants';
 
 @Component({
 	selector: 'app-login',
@@ -35,42 +37,61 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private store: Store<AppState>,
 		private fb: FormBuilder,
-		private router: Router
+		private router: Router,
+		private route: ActivatedRoute
 	) {
 		this.returnUrl = PRIVATE_ROUTES.BASE;
 		this.loginInvalid = false;
 		this.formSubmitAttempt = false;
 
 		this.userLoading$ = this.store
-			.select(selectUserLogin)
+			.select(selectUserIdentity)
 			.pipe(mapIsLoading);
 
 		this.loginSuccess$ = this.store
-			.select(selectUserLogin)
+			.select(selectUserIdentity)
 			.pipe(mapIsSuccess);
 
+		this.loginSuccess$.subscribe((ok) => {
+			if (ok) {
+				let redirectUrl = this.route.snapshot.queryParamMap.get(
+					`redirect`
+				);
+				if (redirectUrl) {
+					this.router.navigate([redirectUrl]);
+				} else {
+					this.router.navigate([PRIVATE_ROUTES.BASE]);
+				}
+
+				this.store.dispatch(
+					toastSuccess({
+						message: 'You have successfully logged in.',
+					})
+				);
+			}
+		});
+
 		this.form = this.fb.group({
-			username: [
-				'',
-				Validators.required,
-				Validators.minLength(3),
-				Validators.maxLength(15),
-			],
-			password: ['', Validators.required, Validators.minLength(8)],
+			username: ['', Validators.compose([Validators.required])],
+			password: ['', Validators.compose([Validators.required])],
 		});
 	}
 
 	ngOnInit(): void {}
 
 	onSubmit() {
-		this.store.dispatch(
-			userLogin({
-				username: this.form.get('username')?.value,
-				password: this.form.get('password')?.value,
-			})
-		);
-
-		this.loginSuccess$.subscribe(() => this.router.navigate(['/private']));
+		this.form.markAllAsTouched();
+		if (this.form.valid) {
+			this.store.dispatch(
+				userLogin({
+					username: this.form.get('username')?.value,
+					password: this.form.get('password')?.value,
+				})
+			);
+		} else {
+			console.log(this.form.get('username')?.errors);
+			console.log(this.form.get('password')?.errors);
+		}
 	}
 
 	isLoading(): Observable<boolean> {

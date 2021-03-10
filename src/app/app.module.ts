@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Inject, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +21,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorToastInterceptor } from '@app/root/interceptors/error-toast.interceptor';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { CorsInterceptor } from '@app/root/interceptors/cors.interceptor';
+import { UnauthorizedInterceptor } from '@app/root/interceptors/unauthorized.interceptor';
+import { ContentTypeInterceptor } from '@app/root/interceptors/content-type.interceptor';
+import { ToastService } from '@app/shared/services/toast.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ToastEffects } from '@app/root/effects/toast.effects';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -43,11 +50,15 @@ import { CorsInterceptor } from '@app/root/interceptors/cors.interceptor';
 		StoreDevtoolsModule.instrument({
 			maxAge: 50,
 		}),
-		EffectsModule.forRoot(),
+		EffectsModule.forRoot([ToastEffects]),
+		FlexLayoutModule,
 	],
 	providers: [
 		UserService,
 		JwtService,
+		ToastService,
+		MatSnackBar,
+		Overlay,
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: ErrorToastInterceptor,
@@ -58,8 +69,20 @@ import { CorsInterceptor } from '@app/root/interceptors/cors.interceptor';
 			useClass: CorsInterceptor,
 			multi: true,
 		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: UnauthorizedInterceptor,
+			multi: true,
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ContentTypeInterceptor,
+			multi: true,
+		},
 	],
 	bootstrap: [AppComponent],
 	exports: [],
 })
-export class AppModule {}
+export class AppModule {
+	constructor() {}
+}

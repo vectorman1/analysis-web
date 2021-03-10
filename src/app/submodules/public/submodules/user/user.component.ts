@@ -14,7 +14,19 @@ import { AppState } from '@app/root/reducers';
 	},
 })
 export class UserComponent implements OnInit {
-	constructor() {}
+	constructor(
+		private userService: UserService,
+		private jwtService: JwtService,
+		private store: Store<AppState>
+	) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		let token = this.userService.getToken();
+		if (token) {
+			let user = this.jwtService.getUser(token);
+			if (user) {
+				this.store.dispatch(userLoginSuccess(user));
+			}
+		}
+	}
 }

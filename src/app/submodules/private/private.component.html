@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" fxFlexFill>
 	<mat-sidenav
 		fxLayout="column"
 		#drawer
@@ -18,8 +18,8 @@
 		</mat-nav-list>
 	</mat-sidenav>
 	<mat-sidenav-content
-		fxLayout="column" class="">
-			<mat-toolbar color="primary" class="header">
+		fxLayout="column">
+			<mat-toolbar class="header mat-primary">
 				<button
 					type="button"
 					aria-label="Toggle sidenav"
@@ -31,6 +31,8 @@
 				</button>
 				<span>analysis-web</span>
 			</mat-toolbar>
-		<router-outlet></router-outlet>
+		<div class="padded">
+			<router-outlet></router-outlet>
+		</div>
 	</mat-sidenav-content>
 </mat-sidenav-container>

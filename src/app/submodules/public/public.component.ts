@@ -3,7 +3,7 @@ import { AppState } from '@app/root/reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { userLogout } from '@app/public/submodules/user/actions/user-logout.actions';
-import { selectUserLogin } from '@app/public/submodules/user/selectors/user.selectors';
+import { selectUserIdentity } from '@app/public/submodules/user/selectors/user.selectors';
 import { mapIsSuccess } from '@app/root/observable.helpers';
 import { Router } from '@angular/router';
 import { userLoginSuccess } from '@app/public/submodules/user/actions/user-login.actions';
@@ -23,7 +23,7 @@ export class PublicComponent implements OnInit {
 
 	constructor(private store: Store<AppState>) {
 		this.isLoggedIn$ = this.store
-			.select(selectUserLogin)
+			.select(selectUserIdentity)
 			.pipe(mapIsSuccess);
 	}
 

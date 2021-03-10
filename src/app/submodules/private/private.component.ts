@@ -10,6 +10,9 @@ import { userLogout } from '@app/public/submodules/user/actions/user-logout.acti
 	selector: 'app-private',
 	templateUrl: './private.component.html',
 	styleUrls: ['./private.component.scss'],
+	host: {
+		class: 'flex',
+	},
 })
 export class PrivateComponent {
 	isHandset$: Observable<boolean> = this.breakpointObserver

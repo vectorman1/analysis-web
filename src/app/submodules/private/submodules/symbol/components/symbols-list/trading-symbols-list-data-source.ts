@@ -37,7 +37,6 @@ export class TradingSymbolsListDataSource extends DataSource<TradingSymbol> {
 	symbolsSubject = new BehaviorSubject<TradingSymbol[]>([]);
 	loadingSubject = new BehaviorSubject<boolean>(false);
 	totalItemsSubject = new BehaviorSubject<number>(0);
-	requestSubject = new BehaviorSubject<any>({});
 
 	private symbols$: Observable<ServerItem<PagedList<TradingSymbol>>>;
 

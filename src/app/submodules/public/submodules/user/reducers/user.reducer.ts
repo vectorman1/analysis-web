@@ -17,14 +17,19 @@ import {
 	userLogoutFailure,
 	userLogoutSuccess,
 } from '../actions/user-logout.actions';
+import {
+	userRegister,
+	userRegisterFailure,
+	userRegisterSuccess,
+} from '@app/public/submodules/user/actions/user-register.actions';
 
 export const userFeatureKey = 'user';
 
-export interface UserState {
+export interface IdentityState {
 	identity: ServerItem<User>;
 }
 
-export const initialState: UserState = {
+export const initialState: IdentityState = {
 	identity: {
 		isLoading: false,
 		isSuccess: false,
@@ -32,7 +37,7 @@ export const initialState: UserState = {
 		error: {},
 		sendValue: {},
 	},
-} as UserState;
+} as IdentityState;
 
 export const reducer = createReducer(
 	initialState,
@@ -45,7 +50,18 @@ export const reducer = createReducer(
 	on(userLoginFailure, (state, err) =>
 		serverCallFailure(state, { payload: err }, () => state.identity)
 	),
-	on(userLogout, (state, req) => initialState)
+
+	on(userLogout, (state, req) => initialState),
+
+	on(userRegister, (state, req) =>
+		serverCallStart(state, { payload: req }, () => state.identity)
+	),
+	on(userRegisterSuccess, (state, req) =>
+		serverCallSuccess(state, { payload: req }, () => state.identity)
+	),
+	on(userRegisterFailure, (state, req) =>
+		serverCallFailure(state, { payload: req }, () => state.identity)
+	)
 	// on(userLogoutSuccess, (state, res) =>
 	// 	serverCallSuccess(state, { payload: res }, () => state.user)
 	// ),

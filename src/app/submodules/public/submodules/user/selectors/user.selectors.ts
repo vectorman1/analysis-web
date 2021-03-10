@@ -1,13 +1,15 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
 	userFeatureKey,
-	UserState,
+	IdentityState,
 } from '@app/public/submodules/user/reducers/user.reducer';
 import { AppState } from '@app/root/reducers';
 
-const selectUser = createFeatureSelector<AppState, UserState>(userFeatureKey);
+const selectUser = createFeatureSelector<AppState, IdentityState>(
+	userFeatureKey
+);
 
-export const selectUserLogin = createSelector(
+export const selectUserIdentity = createSelector(
 	selectUser,
-	(state: UserState) => state.identity
+	(state: IdentityState) => state.identity
 );

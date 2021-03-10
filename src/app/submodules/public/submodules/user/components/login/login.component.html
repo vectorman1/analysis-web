@@ -1,36 +1,76 @@
-<div fxFlexFill  fxLayout="row" fxLayoutAlign="center center">
-	<mat-card class="login-card">
-		<mat-card-header>
-			<mat-card-title>
-				Login
-			</mat-card-title>
+<div fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+	<mat-card
+		class="login-card"
+		fxLayout="column"
+		fxFlex="20"
+		fxLayoutGap="8px"
+	>
+		<mat-card-header fxLayout="row">
+			<mat-card-title> Login </mat-card-title>
 		</mat-card-header>
-		<form [formGroup]="form" autocomplete="off" (ngSubmit)="onSubmit()" fxLayout="column wrap"
-			  fxLayoutAlign="center center" fxLayoutGap="10px">
-			<mat-card-content>
-					<mat-form-field appearance="fill" color="accent">
-						<mat-label>Enter your username</mat-label>
-						<input matInput [type]="'text'" formControlName="username" ngDefaultControl>
-						<mat-error *ngIf="form.get('username')?.invalid">
-							{{ form.get('username')?.errors?.toString() }}
-						</mat-error>
-					</mat-form-field>
-					<mat-form-field appearance="fill" color="accent">
-						<mat-label >Enter your password</mat-label>
-						<input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
-						<button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-							<mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-						</button>
-					</mat-form-field>
-					<mat-checkbox color="accent">Remember me</mat-checkbox>
-			</mat-card-content>
-		</form>
-		<mat-card-actions class="login-actions">
-			<button mat-raised-button color="accent" (click)="onSubmit()" [loading]="(isLoading() | async)">
+
+		<mat-card-content fxLayout="row" fxFlex>
+			<form
+				[formGroup]="form"
+				autocomplete="off"
+				(ngSubmit)="onSubmit()"
+				fxLayout="column"
+				fxFlexFill
+				fxLayoutGap="8px"
+			>
+				<mat-form-field appearance="fill" class="mat-form-field">
+					<mat-label>Enter your username</mat-label>
+					<input
+						matInput
+						[type]="'text'"
+						formControlName="username"
+						ngDefaultControl
+					/>
+					<mat-error *ngIf="form.get('username')?.errors?.required">
+						Username is required.
+					</mat-error>
+				</mat-form-field>
+				<mat-form-field appearance="fill" color="accent">
+					<mat-label>Enter your password</mat-label>
+					<input
+						matInput
+						[type]="hidePassword ? 'password' : 'text'"
+						formControlName="password"
+					/>
+					<mat-error *ngIf="form.get('password')?.errors?.required">
+						Password is required.
+					</mat-error>
+					<button
+						mat-icon-button
+						matSuffix
+						(click)="hidePassword = !hidePassword"
+						[attr.aria-label]="'Hide password'"
+						[attr.aria-pressed]="hidePassword"
+					>
+						<mat-icon>{{
+							hidePassword ? "visibility_off" : "visibility"
+						}}</mat-icon>
+					</button>
+				</mat-form-field>
+				<mat-checkbox color="accent">Remember me</mat-checkbox>
+			</form>
+		</mat-card-content>
+
+		<mat-card-actions
+			fxLayout="row"
+			fxLayoutAlign="end center"
+			class="login-actions"
+			fxFlex
+		>
+			<button
+				mat-raised-button
+				color="accent"
+				(click)="onSubmit()"
+				[loading]="isLoading() | async"
+			>
 				Login &nbsp;
 				<mat-icon>login</mat-icon>
 			</button>
 		</mat-card-actions>
 	</mat-card>
-
 </div>
