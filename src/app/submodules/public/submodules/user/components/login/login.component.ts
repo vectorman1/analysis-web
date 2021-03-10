@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { PRIVATE_ROUTES } from '@app/root/constants/route.constants';
 import { userLogin } from '@app/public/submodules/user/actions/user-login.actions';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { selectUserLogin } from '@app/public/submodules/user/selectors/user.selectors';
+import { selectUserIdentity } from '@app/public/submodules/user/selectors/user.selectors';
 import {
 	mapIsLoading,
 	mapIsNotLoading,
@@ -42,14 +42,18 @@ export class LoginComponent implements OnInit {
 		this.formSubmitAttempt = false;
 
 		this.userLoading$ = this.store
-			.select(selectUserLogin)
+			.select(selectUserIdentity)
 			.pipe(mapIsLoading);
 
 		this.loginSuccess$ = this.store
-			.select(selectUserLogin)
+			.select(selectUserIdentity)
 			.pipe(mapIsSuccess);
 
-		this.loginSuccess$.subscribe(() => this.router.navigate(['/private']));
+		this.loginSuccess$.subscribe((ok) => {
+			if (ok) {
+				this.router.navigate(['/private']);
+			}
+		});
 
 		this.form = this.fb.group({
 			username: ['', Validators.compose([Validators.required])],
