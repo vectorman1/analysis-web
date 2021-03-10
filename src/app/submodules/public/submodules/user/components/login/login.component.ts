@@ -49,28 +49,29 @@ export class LoginComponent implements OnInit {
 			.select(selectUserLogin)
 			.pipe(mapIsSuccess);
 
+		this.loginSuccess$.subscribe(() => this.router.navigate(['/private']));
+
 		this.form = this.fb.group({
-			username: [
-				'',
-				Validators.required,
-				Validators.minLength(3),
-				Validators.maxLength(15),
-			],
-			password: ['', Validators.required, Validators.minLength(8)],
+			username: ['', Validators.compose([Validators.required])],
+			password: ['', Validators.compose([Validators.required])],
 		});
 	}
 
 	ngOnInit(): void {}
 
 	onSubmit() {
-		this.store.dispatch(
-			userLogin({
-				username: this.form.get('username')?.value,
-				password: this.form.get('password')?.value,
-			})
-		);
-
-		this.loginSuccess$.subscribe(() => this.router.navigate(['/private']));
+		this.form.markAllAsTouched();
+		if (this.form.valid) {
+			this.store.dispatch(
+				userLogin({
+					username: this.form.get('username')?.value,
+					password: this.form.get('password')?.value,
+				})
+			);
+		} else {
+			console.log(this.form.get('username')?.errors);
+			console.log(this.form.get('password')?.errors);
+		}
 	}
 
 	isLoading(): Observable<boolean> {
