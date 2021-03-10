@@ -47,10 +47,10 @@ export class UserEffects {
 						this.userService.saveToken(response.token);
 						let user = this.jwtService.getUser(response.token);
 						return userLoginSuccess(user as User);
-					})
+					}),
+					catchError((err: ServerError) => of(userLoginFailure(err)))
 				)
-			),
-			catchError((err: ServerError) => of(userLoginFailure(err)))
+			)
 		)
 	);
 
@@ -73,10 +73,12 @@ export class UserEffects {
 						this.userService.saveToken(res.token);
 						let user = this.jwtService.getUser(res.token);
 						return userRegisterSuccess(user as User);
-					})
+					}),
+					catchError((err: ServerError) =>
+						of(userRegisterFailure(err))
+					)
 				)
-			),
-			catchError((err: ServerError) => of(userRegisterFailure(err)))
+			)
 		)
 	);
 
