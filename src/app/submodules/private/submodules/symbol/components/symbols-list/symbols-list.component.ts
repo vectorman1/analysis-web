@@ -57,18 +57,6 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 
 	ngOnInit(): void {
 		this.dataSource = new TradingSymbolsListDataSource(this.store);
-
-		this.req = {
-			filter: {
-				pageNumber: 1,
-				pageSize: 20,
-				ascending: false,
-				order: 'created_at',
-				text: '',
-			},
-		};
-
-		this.dataSource.loadSymbols(this.req);
 	}
 
 	ngOnDestroy(): void {}
@@ -86,6 +74,8 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 				})
 			)
 			.subscribe();
+
+		this.loadSymbolsPage();
 	}
 
 	loadSymbolsPage() {
