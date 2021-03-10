@@ -33,3 +33,16 @@ jobs:
               uses: zzzze/webhook-trigger@master
               with:
                   webhook_url: ${{ secrets.DEPLOY_WEBHOOK }}
+
+            -   uses: actions/setup-ruby@v1
+            -   name: Send status started failed
+                if: ${{ always() }}
+                env:
+                    JOB_STATUS: ${{ job.status }}
+                    DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+                    HOOK_OS_NAME: ${{ runner.os }}
+                    WORKFLOW_NAME: ${{ github.workflow }}
+                run: |
+                    git clone https://github.com/DiscordHooks/github-actions-discord-webhook.git webhook
+                    bash webhook/send.sh $JOB_STATUS $DISCORD_WEBHOOK_URL
+                shell: bash
