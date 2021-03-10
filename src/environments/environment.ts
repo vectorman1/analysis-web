@@ -10,6 +10,7 @@ const routes = {
 
 export const environment = {
 	production: false,
+	baseUrl: 'https://localhost:4200',
 	apiBaseUrl: 'http://localhost:7070/api/v1/',
 	routes,
 };

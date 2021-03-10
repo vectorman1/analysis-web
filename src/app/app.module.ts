@@ -20,6 +20,7 @@ import { JwtService } from '@app/public/submodules/user/services/jwt.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorToastInterceptor } from '@app/root/interceptors/error-toast.interceptor';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { CorsInterceptor } from '@app/root/interceptors/cors.interceptor';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -50,6 +51,11 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: ErrorToastInterceptor,
+			multi: true,
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: CorsInterceptor,
 			multi: true,
 		},
 	],
