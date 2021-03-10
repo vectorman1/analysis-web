@@ -1,5 +1,3 @@
-import { Currency } from './currency';
-
 export class TradingSymbol {
 	id!: number;
 	uuid!: string;
