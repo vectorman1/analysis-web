@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/root/reducers';
 import { map } from 'rxjs/operators';
-import { selectUserLogin } from '@app/public/submodules/user/selectors/user.selectors';
+import { selectUserIdentity } from '@app/public/submodules/user/selectors/user.selectors';
 import { mapIsSuccess } from '@app/root/observable.helpers';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class UserGuard implements CanActivate {
 	): boolean {
 		let result = false;
 		this.store
-			.select(selectUserLogin)
+			.select(selectUserIdentity)
 			.pipe(mapIsSuccess)
 			.subscribe((res) => {
 				result = res;

@@ -5,6 +5,8 @@ import { API_ROUTES } from '@app/root/constants/route.constants';
 import { LoginResponse } from '@app/public/submodules/user/models/login-response';
 import { LoginRequest } from '@app/public/submodules/user/models/login-request';
 import { APP_CONSTANTS } from '@app/root/constants/app.constants';
+import { RegisterRequest } from '@app/public/submodules/user/models/register-request';
+import { RegisterResponse } from '@app/public/submodules/user/models/register-response';
 
 @Injectable({
 	providedIn: 'root',
@@ -26,5 +28,12 @@ export class UserService {
 
 	login(request: LoginRequest): Observable<LoginResponse> {
 		return this.http.post<LoginResponse>(API_ROUTES.USER.LOGIN, request);
+	}
+
+	register(request: RegisterRequest): Observable<RegisterResponse> {
+		return this.http.post<RegisterResponse>(
+			API_ROUTES.USER.REGISTER,
+			request
+		);
 	}
 }

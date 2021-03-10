@@ -27,6 +27,13 @@ import {
 } from '@app/public/submodules/user/actions/user-logout.actions';
 import { User } from '@app/public/submodules/user/models/user';
 import { JwtService } from '@app/public/submodules/user/services/jwt.service';
+import {
+	USER_REGISTER,
+	userRegisterFailure,
+	userRegisterSuccess,
+} from '@app/public/submodules/user/actions/user-register.actions';
+import { RegisterResponse } from '@app/public/submodules/user/models/register-response';
+import { RegisterRequest } from '@app/public/submodules/user/models/register-request';
 
 @Injectable()
 export class UserEffects {
@@ -54,6 +61,23 @@ export class UserEffects {
 				tap(() => this.userService.logout())
 			),
 		{ dispatch: false }
+	);
+
+	userRegister$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(USER_REGISTER),
+			debounceTime(APP_CONSTANTS.REQUEST_THROTTLE_MS),
+			exhaustMap((req: RegisterRequest) =>
+				this.userService.register(req).pipe(
+					map((res: RegisterResponse) => {
+						this.userService.saveToken(res.token);
+						let user = this.jwtService.getUser(res.token);
+						return userRegisterSuccess(user as User);
+					})
+				)
+			),
+			catchError((err: ServerError) => of(userRegisterFailure(err)))
+		)
 	);
 
 	constructor(
