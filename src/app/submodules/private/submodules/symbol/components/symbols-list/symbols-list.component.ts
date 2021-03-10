@@ -48,7 +48,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 		'isin',
 		'identifier',
 		'name',
-		'currency',
+		'currency_code',
 		'minimum_order_quantity',
 		'market_name',
 		'market_hours_gmt',
