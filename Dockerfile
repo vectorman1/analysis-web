@@ -1,13 +1,10 @@
-FROM node:alpine
-
-WORKDIR /src/web
-ENV PATH /src/web/node_modeuls/.bin:$PATH
-
-COPY package.json /src/web/package.json
-
+FROM tiangolo/node-frontend:10 as build-stage
+WORKDIR /app
+COPY package*.json /app/
 RUN npm install
-RUN npm install -g @angular/cli
+COPY ./ /app/
+RUN npm run build -- --output-path=./dist/out --configuration production
 
-COPY . /src/web
-
-CMD ng serve
+FROM nginx:1.15
+COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
+COPY --from=build-stage /nginx.conf /etc/nginx/conf.d/default.conf
