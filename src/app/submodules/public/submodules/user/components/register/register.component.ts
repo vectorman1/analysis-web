@@ -15,7 +15,6 @@ import { userRegister } from '@app/public/submodules/user/actions/user-register.
 import { Observable } from 'rxjs';
 import { selectUserIdentity } from '@app/public/submodules/user/selectors/user.selectors';
 import { mapIsLoading, mapIsSuccess } from '@app/root/observable.helpers';
-import { childrenEqual } from '@app/custom-validators';
 import { toastSuccess } from '@app/root/actions/toast.actions';
 
 @Component({

@@ -9,23 +9,14 @@ import { userLoginSuccess } from '@app/public/submodules/user/actions/user-login
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
+	host: {
+		class: 'flex',
+	},
 })
 export class AppComponent {
 	title = 'analysis-web';
 
-	constructor(
-		private userService: UserService,
-		private jwtService: JwtService,
-		private store: Store<AppState>
-	) {}
+	constructor() {}
 
-	ngOnInit(): void {
-		let token = this.userService.getToken();
-		if (token) {
-			let user = this.jwtService.getUser(token);
-			if (user) {
-				this.store.dispatch(userLoginSuccess(user));
-			}
-		}
-	}
+	ngOnInit(): void {}
 }
