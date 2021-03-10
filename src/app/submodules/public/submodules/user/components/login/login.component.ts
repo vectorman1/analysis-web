@@ -11,8 +11,10 @@ import {
 	mapIsNotLoading,
 	mapIsSuccess,
 } from '@app/root/observable.helpers';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { toastSuccess } from '@app/root/actions/toast.actions';
+import { APP_CONSTANTS } from '@app/root/constants/app.constants';
 
 @Component({
 	selector: 'app-login',
@@ -35,7 +37,8 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private store: Store<AppState>,
 		private fb: FormBuilder,
-		private router: Router
+		private router: Router,
+		private route: ActivatedRoute
 	) {
 		this.returnUrl = PRIVATE_ROUTES.BASE;
 		this.loginInvalid = false;
@@ -51,7 +54,20 @@ export class LoginComponent implements OnInit {
 
 		this.loginSuccess$.subscribe((ok) => {
 			if (ok) {
-				this.router.navigate(['/private']);
+				let redirectUrl = this.route.snapshot.queryParamMap.get(
+					`redirect`
+				);
+				if (redirectUrl) {
+					this.router.navigate([redirectUrl]);
+				} else {
+					this.router.navigate([PRIVATE_ROUTES.BASE]);
+				}
+
+				this.store.dispatch(
+					toastSuccess({
+						message: 'You have successfully logged in.',
+					})
+				);
 			}
 		});
 
