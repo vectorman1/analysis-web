@@ -18,21 +18,19 @@
 				<h1 class="mat-h1 nm">Symbols</h1>
 			</div>
 		</div>
-		<div fxLayout="column" fxFlex fxLayoutAlign="start center">
-			<div fxLayout="row" fxFlexFill fxLayoutAlign="end center">
-				<mat-form-field class="mat-input" color="accent" fxFlex="30">
-					<mat-label>Search by ISIN, Identifier or Name</mat-label>
-					<input
-						matInput
-						type="text"
-						autocomplete="off"
-						[(ngModel)]="searchString"
-					/>
-				</mat-form-field>
-				<button mat-icon-button (click)="loadSymbolsPage()">
-					<mat-icon>search</mat-icon>
-				</button>
-			</div>
+		<div fxLayout="row" fxFlex fxLayoutAlign="end center">
+			<button mat-icon-button (click)="loadSymbolsPage()">
+				<mat-icon>search</mat-icon>
+			</button>
+			<mat-form-field class="mat-input" color="accent" fxFlex="30">
+				<mat-label>Search by ISIN, Identifier or Name</mat-label>
+				<input
+					matInput
+					type="text"
+					autocomplete="off"
+					[(ngModel)]="searchString"
+				/>
+			</mat-form-field>
 		</div>
 	</div>
 
