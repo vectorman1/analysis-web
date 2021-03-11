@@ -83,14 +83,12 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 			filter: {
 				pageNumber: this.paginator.pageIndex + 1,
 				pageSize: this.paginator.pageSize,
-				order: this.sort.active ? this.sort.active : 'uuid',
-				ascending: !!this.sort.direction
-					? this.sort.direction === 'asc'
-					: true,
+				order: this.sort.active,
+				ascending: this.sort.direction === 'asc',
 				text: this.searchString,
 			},
 		};
-		console.log(this.searchString);
+
 		this.dataSource.loadSymbols(this.req);
 	}
 }

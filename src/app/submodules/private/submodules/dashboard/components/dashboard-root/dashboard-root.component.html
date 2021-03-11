@@ -1,50 +1,218 @@
-<div
-	fxFlexFill
-	fxLayout="column"
-	fxLayoutAlign="start stretch"
-	class="content"
-	fxLayoutGap="16px">
-	<div fxLayout="row" fxFlex="5" fxLayoutAlign="start center">
-		<div fxLayout="column" fxFlex="15">
-			<div fxLayout="row" fxFlexFill fxLayoutAlign="start center">
-				<h1 class="mat-h1 nm">Dashboard</h1>
-			</div>
-		</div>
-	</div>
-
-	<div fxLayout="row" fxFlex fxLayoutAlign="center center">
-		<div fxLayout="column" fxFlexFill fxLayoutAlign="start stretch">
-			<mat-grid-list cols="2" rowHeight="350px">
-				<mat-grid-tile
-					*ngFor="let card of cards | async"
-					[colspan]="card.cols"
-					[rowspan]="card.rows"
+<mat-grid-list cols="2" rowHeight="350px">
+	<mat-grid-tile
+		[colspan]="2"
+		[rowspan]="1"
+	>
+		<mat-card class="dashboard-card">
+			<mat-card-header>
+				<mat-card-title>
+					Card 1
+					<button
+						mat-icon-button
+						class="more-button"
+						[matMenuTriggerFor]="menu"
+						aria-label="Toggle menu"
+					>
+						<mat-icon>more_vert</mat-icon>
+					</button>
+					<mat-menu #menu="matMenu" xPosition="before">
+						<button mat-menu-item>Expand</button>
+						<button mat-menu-item>Remove</button>
+					</mat-menu>
+				</mat-card-title>
+			</mat-card-header>
+			<mat-card-content class="dashboard-card-content">
+				<div>Card Content Here</div>
+			</mat-card-content>
+		</mat-card>
+	</mat-grid-tile>
+	<mat-grid-tile
+		[colspan]="1"
+		[rowspan]="1"
+	>
+		<mat-card class="dashboard-card">
+			<mat-card-header>
+				<mat-card-title>
+					Card 2
+					<button
+						mat-icon-button
+						class="more-button"
+						[matMenuTriggerFor]="menu"
+						aria-label="Toggle menu"
+					>
+						<mat-icon>more_vert</mat-icon>
+					</button>
+					<mat-menu #menu="matMenu" xPosition="before">
+						<button mat-menu-item>Expand</button>
+						<button mat-menu-item>Remove</button>
+					</mat-menu>
+				</mat-card-title>
+			</mat-card-header>
+			<mat-card-content class="dashboard-card-content">
+				<div>Card Content Here</div>
+			</mat-card-content>
+		</mat-card>
+	</mat-grid-tile>
+	<mat-grid-tile
+		[colspan]="1"
+		[rowspan]="2"
+	>
+		<mat-card class="dashboard-card">
+			<mat-card-header>
+				<mat-card-title>
+					Newest Symbols on 212
+					<button
+						mat-icon-button
+						class="more-button"
+						[matMenuTriggerFor]="menu"
+						aria-label="Toggle menu"
+					>
+						<mat-icon>more_vert</mat-icon>
+					</button>
+					<mat-menu #menu="matMenu" xPosition="before">
+						<button mat-menu-item>Expand</button>
+						<button mat-menu-item>Remove</button>
+					</mat-menu>
+				</mat-card-title>
+			</mat-card-header>
+			<mat-card-content fxLayout="column" fxFlexFill>
+				<table
+					fxFlex="nogrow"
+					mat-table
+					matSort
+					aria-label="Elements"
+					[dataSource]="dataSource"
+					class="table symbols-list-table"
+					matSortDisableClear
+					matSortActive="created_at"
+					matSortDirection="desc"
+					[width]="'100%'"
 				>
-					<mat-card class="dashboard-card">
-						<mat-card-header>
-							<mat-card-title>
-								{{ card.title }}
-								<button
-									mat-icon-button
-									class="more-button"
-									[matMenuTriggerFor]="menu"
-									aria-label="Toggle menu"
-								>
-									<mat-icon>more_vert</mat-icon>
-								</button>
-								<mat-menu #menu="matMenu" xPosition="before">
-									<button mat-menu-item>Expand</button>
-									<button mat-menu-item>Remove</button>
-								</mat-menu>
-							</mat-card-title>
-						</mat-card-header>
-						<mat-card-content class="dashboard-card-content">
-							<div>Card Content Here</div>
-						</mat-card-content>
-					</mat-card>
-				</mat-grid-tile>
-			</mat-grid-list>
-		</div>
-	</div>
-</div>
+					<!-- Identifier Column -->
+					<ng-container matColumnDef="identifier">
+						<th
+							mat-header-cell
+							*matHeaderCellDef
+							mat-sort-header="identifier"
+							[width]="'5%'"
+							[disabled]="
+								dataSource?.getIsLoading() | async
+							"
+						>
+							Identifier
+						</th>
+						<td mat-cell *matCellDef="let row">
+							<a
+								href="#"
+								[routerLink]="[
+									'/private/symbol',
+									row.uuid,
+									'details'
+								]"
+								mat-button
+							>{{ row.identifier }}
+							</a>
+						</td>
+					</ng-container>
 
+					<!-- Name Column -->
+					<ng-container matColumnDef="name">
+						<th
+							mat-header-cell
+							*matHeaderCellDef
+							mat-sort-header="name"
+							[width]="'25%'"
+							[disabled]="
+								dataSource?.getIsLoading() | async
+							"
+						>
+							Name
+						</th>
+						<td mat-cell *matCellDef="let row">
+							{{ row.name }}
+						</td>
+					</ng-container>
+
+					<!-- Market Name Column -->
+					<ng-container matColumnDef="market_name">
+						<th
+							mat-header-cell
+							*matHeaderCellDef
+							mat-sort-header="market_name"
+							[width]="'15%'"
+							[disabled]="
+								dataSource?.getIsLoading() | async
+							"
+						>
+							Market Name
+						</th>
+						<td mat-cell *matCellDef="let row">
+							{{ row.marketName }}
+						</td>
+					</ng-container>
+
+					<!-- Created At Column -->
+					<ng-container matColumnDef="created_at">
+						<th
+							mat-header-cell
+							*matHeaderCellDef
+							mat-sort-header="created_at"
+							[disabled]="
+								dataSource?.getIsLoading() | async
+							"
+						>
+							Created At
+						</th>
+						<td mat-cell *matCellDef="let row">
+							{{ row.createdAt | date }}
+						</td>
+					</ng-container>
+
+					<tr
+						mat-header-row
+						*matHeaderRowDef="displayedColumns"
+					></tr>
+					<tr
+						mat-row
+						*matRowDef="let row; columns: displayedColumns"
+					></tr>
+				</table>
+
+				<div
+					fxFlex
+					fxLayout=""
+					fxLayoutAlign="center center"
+					class="spinner-container">
+					<mat-spinner></mat-spinner>
+				</div>
+			</mat-card-content>
+		</mat-card>
+	</mat-grid-tile>
+	<mat-grid-tile
+		[colspan]="1"
+		[rowspan]="1"
+	>
+		<mat-card class="dashboard-card">
+			<mat-card-header>
+				<mat-card-title>
+					Card 4
+					<button
+						mat-icon-button
+						class="more-button"
+						[matMenuTriggerFor]="menu"
+						aria-label="Toggle menu"
+					>
+						<mat-icon>more_vert</mat-icon>
+					</button>
+					<mat-menu #menu="matMenu" xPosition="before">
+						<button mat-menu-item>Expand</button>
+						<button mat-menu-item>Remove</button>
+					</mat-menu>
+				</mat-card-title>
+			</mat-card-header>
+			<mat-card-content class="dashboard-card-content">
+				<div>Card Content Here</div>
+			</mat-card-content>
+		</mat-card>
+	</mat-grid-tile>
+</mat-grid-list>

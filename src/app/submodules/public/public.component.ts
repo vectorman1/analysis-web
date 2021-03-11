@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AppState } from '@app/root/reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -18,16 +18,16 @@ import { JwtService } from '@app/public/submodules/user/services/jwt.service';
 		class: 'flex',
 	},
 })
-export class PublicComponent implements OnInit {
-	isLoggedIn$: Observable<boolean>;
+export class PublicComponent implements AfterViewInit {
+	isLoggedIn$!: Observable<boolean>;
 
-	constructor(private store: Store<AppState>) {
+	constructor(private store: Store<AppState>) {}
+
+	ngAfterViewInit(): void {
 		this.isLoggedIn$ = this.store
 			.select(selectUserIdentity)
 			.pipe(mapIsSuccess);
 	}
-
-	ngOnInit(): void {}
 
 	logout() {
 		this.store.dispatch(userLogout());
