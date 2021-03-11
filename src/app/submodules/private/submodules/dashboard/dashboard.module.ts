@@ -8,6 +8,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { DashboardRootComponent } from '@app/private/submodules/dashboard/components/dashboard-root/dashboard-root.component';
 import { DashboardComponent } from './dashboard.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
 	declarations: [DashboardRootComponent, DashboardComponent],
@@ -18,6 +23,11 @@ import { DashboardComponent } from './dashboard.component';
 		MatCardModule,
 		MatMenuModule,
 		MatIconModule,
+		FlexLayoutModule,
+		MatButtonModule,
+		MatProgressSpinnerModule,
+		MatTableModule,
+		MatSortModule,
 	],
 })
 export class DashboardModule {}
