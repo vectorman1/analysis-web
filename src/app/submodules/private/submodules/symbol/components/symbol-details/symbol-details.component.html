@@ -1,7 +1,22 @@
-<div fxFlexFill fxLayout="column" fxLayoutAlign="start">
-	<div fxLayout="row" fxFlex="5" class="page-header" fxLayoutAlign="start center">
-		<button mat-icon-button class="back-button" [routerLink]="['/private/symbol']"><mat-icon>arrow_back</mat-icon></button>
-		<span class="mat-h1 nm">Details</span>
+<div
+	fxFlexFill
+	fxLayout="column"
+	fxLayoutAlign="start stretch"
+	class="content"
+	fxLayoutGap="16px">
+	<div fxLayout="row" fxFlex="10" fxLayoutAlign="start center">
+		<div fxLayout="column" fxFlex="15">
+			<div fxLayout="row" fxFlexFill fxLayoutAlign="start center">
+				<button
+					mat-icon-button
+					class="back-button"
+					[routerLink]="['/private/symbol']"
+				>
+					<mat-icon>arrow_back</mat-icon>
+				</button>
+				<h1 class="mat-h1 nm">Details</h1>
+			</div>
+		</div>
 	</div>
 
 	<div fxLayout="row" fxFlex fxLayoutAlign="center stretch">
