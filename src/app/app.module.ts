@@ -15,7 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UserService } from '@app/public/submodules/user/services/user.service';
 import { JwtService } from '@app/public/submodules/user/services/jwt.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorToastInterceptor } from '@app/root/interceptors/error-toast.interceptor';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { CorsInterceptor } from '@app/root/interceptors/cors.interceptor';
@@ -49,6 +49,7 @@ import { ToastEffects } from '@app/root/effects/toast.effects';
 		}),
 		EffectsModule.forRoot([ToastEffects]),
 		FlexLayoutModule,
+		HttpClientModule,
 	],
 	providers: [
 		UserService,
