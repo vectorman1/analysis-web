@@ -26,6 +26,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ToastEffects } from '@app/root/effects/toast.effects';
+import { IdentityInterceptor } from '@app/root/interceptors/identity.interceptor';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -75,6 +76,11 @@ import { ToastEffects } from '@app/root/effects/toast.effects';
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: ContentTypeInterceptor,
+			multi: true,
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: IdentityInterceptor,
 			multi: true,
 		},
 	],

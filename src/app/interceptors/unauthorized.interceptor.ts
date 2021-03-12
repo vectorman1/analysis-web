@@ -11,10 +11,11 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/root/reducers';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UnauthorizedInterceptor implements HttpInterceptor {
-	constructor(private store: Store<AppState>) {}
+	constructor(private store: Store<AppState>, private router: Router) {}
 
 	intercept(
 		request: HttpRequest<any>,
@@ -27,6 +28,7 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
 					if (err instanceof HttpErrorResponse) {
 						if (err.status === 401) {
 							this.store.dispatch(userLogout());
+							this.router.navigate(['/public/user/login']);
 						}
 					}
 				}

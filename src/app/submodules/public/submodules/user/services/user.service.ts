@@ -15,15 +15,15 @@ export class UserService {
 	constructor(private http: HttpClient) {}
 
 	saveToken(token: string) {
-		localStorage.setItem(APP_CONSTANTS.TOKEN_COOKIE, token);
+		localStorage.setItem(APP_CONSTANTS.TOKEN, token);
 	}
 
 	getToken(): string | null {
-		return localStorage.getItem(APP_CONSTANTS.TOKEN_COOKIE);
+		return localStorage.getItem(APP_CONSTANTS.TOKEN);
 	}
 
 	logout() {
-		localStorage.removeItem(APP_CONSTANTS.TOKEN_COOKIE);
+		localStorage.removeItem(APP_CONSTANTS.TOKEN);
 	}
 
 	login(request: LoginRequest): Observable<LoginResponse> {
