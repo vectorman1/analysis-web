@@ -4,8 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PrivateModule } from '@app/private/private.module';
-import { PrivateRoutingModule } from '@app/private/private-routing.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -39,7 +37,6 @@ import { ToastEffects } from '@app/root/effects/toast.effects';
 		MatToolbarModule,
 		MatListModule,
 		MatIconModule,
-		PrivateModule,
 		ToastrModule.forRoot(),
 		StoreModule.forRoot(reducers, {
 			runtimeChecks: {
