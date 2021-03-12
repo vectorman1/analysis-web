@@ -5,15 +5,15 @@ import { PagedRequest } from '@app/shared/models/request';
 import {
 	TradingSymbol,
 	TradingSymbols,
-} from '@app/shared/models/tradingSymbol';
+} from '@app/submodules/symbol/models/tradingSymbol';
 import { API_ROUTES } from '@app/root/constants/route.constants';
 import { PagedList } from '@app/root/models/paged-list';
-import { SymbolDetails } from '@app/shared/models/symbol-details';
+import { SymbolDetails } from '@app/submodules/symbol/models/symbol-details';
 
 @Injectable({
 	providedIn: 'root',
 })
-export class SymbolsService {
+export class SymbolService {
 	constructor(private http: HttpClient) {}
 
 	getPaged(req: PagedRequest): Observable<PagedList<TradingSymbol>> {
