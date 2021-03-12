@@ -8,7 +8,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { EffectsModule } from '@ngrx/effects';
 import { SymbolEffects } from './effects/symbol.effects';
-import { SymbolService } from '@app/submodules/symbol/services/symbol.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SymbolDetailsComponent } from '@app/submodules/symbol/components/symbol-details/symbol-details.component';
 import { MatCardModule } from '@angular/material/card';
@@ -26,6 +25,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { SymbolService } from '@app/submodules/symbol/services/symbol.service';
 
 @NgModule({
 	declarations: [
