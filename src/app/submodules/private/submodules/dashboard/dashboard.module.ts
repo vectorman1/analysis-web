@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
 	declarations: [DashboardRootComponent, DashboardComponent],
@@ -28,6 +29,7 @@ import { MatSortModule } from '@angular/material/sort';
 		MatProgressSpinnerModule,
 		MatTableModule,
 		MatSortModule,
+		EffectsModule.forFeature(),
 	],
 })
 export class DashboardModule {}

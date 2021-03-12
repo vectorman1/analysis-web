@@ -21,6 +21,7 @@ import { JwtService } from '@app/public/submodules/user/services/jwt.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from '@app/shared/shared.module';
 import { ToastService } from '@app/shared/services/toast.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	declarations: [LoginComponent, RegisterComponent, UserComponent],
@@ -39,6 +40,7 @@ import { ToastService } from '@app/shared/services/toast.service';
 		EffectsModule.forFeature([UserEffects]),
 		FlexLayoutModule,
 		SharedModule,
+		HttpClientModule,
 	],
 	providers: [UserService, JwtService],
 })
