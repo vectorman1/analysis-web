@@ -41,6 +41,7 @@ jobs:
                     git clone https://github.com/DiscordHooks/github-actions-discord-webhook.git webhook
                     bash webhook/send.sh $JOB_STATUS $DISCORD_WEBHOOK_URL
                 shell: bash
+
     notify_swarm:
         name: Notify Docker Swarm to update services
         runs-on: ubuntu-latest

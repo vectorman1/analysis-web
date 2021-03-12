@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { ServerItem } from '@app/root/models/server-item.model';
-import { TradingSymbol } from '@app/shared/models/tradingSymbol';
+import { TradingSymbol } from '@app/submodules/symbol/models/tradingSymbol';
 import {
 	symbolsGetPaged,
 	symbolsGetPagedFailure,
@@ -17,7 +17,7 @@ import {
 	symbolsGetDetailsFailure,
 	symbolsGetDetailsSuccess,
 } from '@app/submodules/symbol/actions/symbol-get-details.actions';
-import { SymbolDetails } from '@app/shared/models/symbol-details';
+import { SymbolDetails } from '@app/submodules/symbol/models/symbol-details';
 
 export const symbolFeatureKey = 'symbol';
 

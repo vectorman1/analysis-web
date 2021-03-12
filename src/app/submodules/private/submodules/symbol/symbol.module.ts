@@ -7,13 +7,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SymbolEffects } from './effects/symbol.effects';
-import { SymbolsService } from '@app/submodules/symbol/services/symbols.service';
+import { SymbolService } from '@app/submodules/symbol/services/symbol.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SymbolDetailsComponent } from '@app/submodules/symbol/components/symbol-details/symbol-details.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -26,7 +23,6 @@ import * as echarts from 'echarts';
 import { SymbolComponent } from '@app/submodules/symbol/symbol.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatListModule } from '@angular/material/list';
-import { SymbolPropertyComponent } from './components/symbol-property/symbol-property.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -36,7 +32,6 @@ import { FormsModule } from '@angular/forms';
 		SymbolsListComponent,
 		SymbolDetailsComponent,
 		SymbolComponent,
-		SymbolPropertyComponent,
 	],
 	imports: [
 		CommonModule,
@@ -62,6 +57,6 @@ import { FormsModule } from '@angular/forms';
 		MatInputModule,
 		FormsModule,
 	],
-	providers: [SymbolsService],
+	providers: [SymbolService],
 })
 export class SymbolModule {}

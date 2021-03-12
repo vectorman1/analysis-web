@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/root/reducers';
 import { symbolsGetDetails } from '@app/submodules/symbol/actions/symbol-get-details.actions';
 import { SymbolDetailsRequest } from '@app/shared/models/request';
-import { SymbolDetails } from '@app/shared/models/symbol-details';
+import { SymbolDetails } from '@app/submodules/symbol/models/symbol-details';
 import { BehaviorSubject, Observable, ReplaySubject, Subscription } from 'rxjs';
 import { selectSymbolDetails } from '@app/submodules/symbol/selectors/symbol.selectors';
 import { ServerItem } from '@app/root/models/server-item.model';

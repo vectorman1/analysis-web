@@ -4,7 +4,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { TradingSymbolsListDataSource } from './trading-symbols-list-data-source';
 import { Store } from '@ngrx/store';
-import { TradingSymbol } from '@app/shared/models/tradingSymbol';
+import { TradingSymbol } from '@app/submodules/symbol/models/tradingSymbol';
 
 import { merge, Subscription } from 'rxjs';
 import {

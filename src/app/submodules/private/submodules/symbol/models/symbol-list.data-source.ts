@@ -1,38 +1,23 @@
 import { DataSource } from '@angular/cdk/collections';
+import { TradingSymbol } from '@app/submodules/symbol/models/tradingSymbol';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { ServerItem } from '@app/root/models/server-item.model';
+import { PagedList } from '@app/root/models/paged-list';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import {
-	TradingSymbol,
-	TradingSymbols,
-} from '@app/submodules/symbol/models/tradingSymbol';
-import { PagedRequest } from '@app/shared/models/request';
-import { ServerItem } from '@app/root/models/server-item.model';
-import { symbolsGetPaged } from '@app/submodules/symbol/actions/symbol-get-paged.actions';
-import { selectSymbolList } from '@app/submodules/symbol/selectors/symbol.selectors';
-
-import * as fromSymbols from '@app/submodules/symbol/selectors/symbol.selectors';
-import { SymbolState } from '@app/submodules/symbol/reducers/symbol.reducer';
+import { Store } from '@ngrx/store';
 import { AppState } from '@app/root/reducers';
-import { map, tap } from 'rxjs/operators';
+import * as fromSymbols from '@app/submodules/symbol/selectors/symbol.selectors';
 import {
 	mapIsLoading,
-	mapIsSuccess,
 	mapPageItems,
-	mapSendValue,
 	mapTotalItems,
 	mapValue,
 } from '@app/root/observable.helpers';
-import { PagedList } from '@app/root/models/paged-list';
-import { ServerError } from '@app/shared/models/server-error';
+import { PagedRequest } from '@app/shared/models/request';
+import { symbolsGetPaged } from '@app/submodules/symbol/actions/symbol-get-paged.actions';
 
-/**
- * Data source for the SymbolsList view. This class should
- * encapsulate all logic for fetching and manipulating the displayed data
- * (including sorting, pagination, and filtering).
- */
-export class TradingSymbolsListDataSource extends DataSource<TradingSymbol> {
+export class SymbolsListDataSource extends DataSource<TradingSymbol> {
 	subscriptions = Array<Subscription>();
 	symbolsSubject = new BehaviorSubject<TradingSymbol[]>([]);
 	loadingSubject = new BehaviorSubject<boolean>(false);

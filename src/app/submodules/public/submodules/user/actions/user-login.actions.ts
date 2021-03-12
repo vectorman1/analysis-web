@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { SymbolDetails } from '@app/shared/models/symbol-details';
+import { SymbolDetails } from '@app/submodules/symbol/models/symbol-details';
 import { ServerError } from '@app/shared/models/server-error';
 import { LoginRequest } from '@app/public/submodules/user/models/login-request';
 import { User } from '@app/public/submodules/user/models/user';
