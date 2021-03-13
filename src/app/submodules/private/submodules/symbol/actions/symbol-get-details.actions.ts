@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { PagedRequest, SymbolDetailsRequest } from '@app/shared/models/request';
+import { PagedRequest } from '@app/shared/models/request';
 import { PagedList } from '@app/root/models/paged-list';
 import { TradingSymbol } from '@app/submodules/symbol/models/tradingSymbol';
 import { ServerError } from '@app/shared/models/server-error';
@@ -8,7 +8,10 @@ import {
 	SYMBOLS_GET_PAGED_FAILURE,
 	SYMBOLS_GET_PAGED_SUCCESS,
 } from '@app/submodules/symbol/actions/symbol-get-paged.actions';
-import { SymbolDetails } from '@app/submodules/symbol/models/symbol-details';
+import {
+	SymbolDetails,
+	SymbolDetailsRequest,
+} from '@app/submodules/symbol/models/symbol-details';
 
 export const SYMBOLS_GET_DETAILS = '[Symbols] Get Symbol Details';
 export const SYMBOLS_GET_DETAILS_SUCCESS =

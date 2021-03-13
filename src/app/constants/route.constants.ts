@@ -14,6 +14,9 @@ export const API_ROUTES = {
 		LOGIN: setRoute('users/login'),
 		REGISTER: setRoute('users/register'),
 	},
+	HISTORIES: {
+		CHART: (uuid: string) => setRoute(`histories/${uuid}/chart`),
+	},
 };
 
 export const PRIVATE_ROUTES = {

@@ -18,12 +18,20 @@ import {
 	symbolsGetDetailsSuccess,
 } from '@app/submodules/symbol/actions/symbol-get-details.actions';
 import { SymbolDetails } from '@app/submodules/symbol/models/symbol-details';
+import { SymbolChart } from '@app/submodules/symbol/models/symbol-chart';
+import {
+	symbolsGetChartFailure,
+	symbolsGetChartReset,
+	symbolsGetChartSuccess,
+} from '../actions/symbol-get-chart.actions';
+import { symbolsGetChart } from '../actions/symbol-get-chart.actions';
 
 export const symbolFeatureKey = 'symbol';
 
 export interface SymbolState {
 	symbols: ServerItem<PagedList<TradingSymbol>>;
 	symbolDetails: ServerItem<SymbolDetails>;
+	symbolChart: ServerItem<SymbolChart>;
 }
 
 export const initialState: SymbolState = <SymbolState>{};
@@ -39,6 +47,7 @@ export const reducer = createReducer(
 	on(symbolsGetPagedFailure, (state, err) =>
 		serverCallFailure(state, { payload: err }, () => state.symbols)
 	),
+
 	on(symbolsGetDetails, (state, req) =>
 		serverCallStart(state, { payload: req }, () => state.symbolDetails)
 	),
@@ -47,5 +56,15 @@ export const reducer = createReducer(
 	),
 	on(symbolsGetDetailsFailure, (state, err) =>
 		serverCallFailure(state, { payload: err }, () => state.symbolDetails)
+	),
+
+	on(symbolsGetChart, (state, req) =>
+		serverCallStart(state, { payload: req }, () => state.symbolChart)
+	),
+	on(symbolsGetChartSuccess, (state, res) =>
+		serverCallSuccess(state, { payload: res }, () => state.symbolChart)
+	),
+	on(symbolsGetChartFailure, (state, err) =>
+		serverCallFailure(state, { payload: err }, () => state.symbolChart)
 	)
 );

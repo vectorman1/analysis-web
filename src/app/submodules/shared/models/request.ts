@@ -13,11 +13,3 @@ export class Filter {
 	ascending!: boolean;
 	text!: string;
 }
-
-export class SymbolDetailsRequest {
-	constructor(uuid: string) {
-		this.uuid = uuid;
-	}
-
-	uuid!: string;
-}

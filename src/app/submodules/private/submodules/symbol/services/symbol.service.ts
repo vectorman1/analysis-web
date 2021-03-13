@@ -9,6 +9,10 @@ import {
 import { API_ROUTES } from '@app/root/constants/route.constants';
 import { PagedList } from '@app/root/models/paged-list';
 import { SymbolDetails } from '@app/submodules/symbol/models/symbol-details';
+import {
+	SymbolChartRequest,
+	SymbolChart,
+} from '@app/submodules/symbol/models/symbol-chart';
 
 @Injectable({
 	providedIn: 'root',
@@ -27,5 +31,12 @@ export class SymbolService {
 
 	getDetails(uuid: string): Observable<SymbolDetails> {
 		return this.http.get<SymbolDetails>(API_ROUTES.SYMBOL.DETAILS(uuid));
+	}
+
+	getChart(req: SymbolChartRequest): Observable<SymbolChart> {
+		return this.http.post<SymbolChart>(
+			API_ROUTES.HISTORIES.CHART(req.uuid),
+			req
+		);
 	}
 }
