@@ -18,9 +18,6 @@ export class ErrorToastInterceptor implements HttpInterceptor {
 	constructor(private store: Store<AppState>) {}
 
 	openSnackBar(err: any) {
-		if (environment.production) {
-			return;
-		}
 		this.store.dispatch(toastError(err));
 	}
 	intercept(
@@ -31,7 +28,9 @@ export class ErrorToastInterceptor implements HttpInterceptor {
 			tap(
 				() => {},
 				(err: any) => {
-					this.openSnackBar(err);
+					if (err.status === 400) {
+						this.openSnackBar(err);
+					}
 				}
 			)
 		);
