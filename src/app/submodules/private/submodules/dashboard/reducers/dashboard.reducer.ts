@@ -18,6 +18,7 @@ export const dashboardFeatureKey = 'dashboard';
 export interface DashboardState {
 	newestSymbols: ServerItem<PagedList<TradingSymbol>>;
 	symbolsUnderMA120: ServerItem<PagedList<TradingSymbol>>;
+	symbolsUnderRSI30: ServerItem<PagedList<any>>;
 }
 
 export const initialState: DashboardState = <DashboardState>{};
