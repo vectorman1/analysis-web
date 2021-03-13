@@ -49,7 +49,7 @@ import { SymbolService } from '@app/submodules/symbol/services/symbol.service';
 		MatTabsModule,
 		MatGridListModule,
 		NgxEchartsModule.forRoot({
-			echarts,
+			echarts: () => import('echarts'),
 		}),
 		FlexLayoutModule,
 		MatListModule,

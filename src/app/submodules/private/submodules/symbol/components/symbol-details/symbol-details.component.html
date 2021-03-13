@@ -4,7 +4,7 @@
 	fxLayoutAlign="start stretch"
 	class="content"
 	fxLayoutGap="16px">
-	<div fxLayout="row" fxFlex="10" fxLayoutAlign="start center">
+	<div fxLayout="row" fxFlex="5" fxLayoutAlign="start center">
 		<div fxLayout="column" fxFlex="15">
 			<div fxLayout="row" fxFlexFill fxLayoutAlign="start center">
 				<button
@@ -56,13 +56,13 @@
 					</mat-card-subtitle>
 				</mat-card-header>
 				<mat-card-content fxFlex>
-					<mat-tab-group mat-stretch-tabs fxFlexFill fxLayoutAlign="start stretch" fxLayout="column" fxLayoutGap="8px">
+					<mat-tab-group mat-stretch-tabs fxFlexFill fxLayoutAlign="start stretch" fxLayout="column" fxLayoutGap="8px" (selectedTabChange)="handleTabChange($event)">
 						<mat-tab fxFlex="">
 							<ng-template mat-tab-label>
 								<mat-icon class="tab-icon">folder_open</mat-icon>
 								Overview
 							</ng-template>
-							<div fxFlex>
+							<div fxFlexFill>
 								<div fxFlex="35" fxLayout="column">
 									<mat-list>
 										<mat-list-item class="mat-list-item-word-wrap">
@@ -245,7 +245,7 @@
 						</mat-tab>
 
 
-						<mat-tab>
+						<mat-tab fxFlex="">
 							<ng-template mat-tab-label>
 								<mat-icon class="tab-icon">category</mat-icon>
 								Fundamentals
@@ -255,12 +255,15 @@
 							</div>
 						</mat-tab>
 
-						<mat-tab>
+						<mat-tab fxFlex>
 							<ng-template mat-tab-label>
 								<mat-icon class="tab-icon">insert_chart_outlined</mat-icon>
 								Price Action
 							</ng-template>
-							<div echarts [options]="priceActionChartOptions" class="price-action-chart"></div>
+							<div fxFlexFill fxLayoutAlign="center center" *ngIf="isChartLoadingSubject | async">
+								<mat-spinner></mat-spinner>
+							</div>
+							<div echarts [options]="priceActionChartOptions" *ngIf="!(isChartLoadingSubject | async)"></div>
 						</mat-tab>
 					</mat-tab-group>
 				</mat-card-content>

@@ -18,3 +18,8 @@ export const selectSymbolDetails = createSelector(
 	selectSymbol,
 	(state: SymbolState) => state.symbolDetails
 );
+
+export const selectSymbolChart = createSelector(
+	selectSymbol,
+	(state: SymbolState) => state.symbolChart
+);
