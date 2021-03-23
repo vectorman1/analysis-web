@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { PagedRequest } from '../../../../shared/models/request';
 import { ServerError } from '../../../../shared/models/server-error';
-import { TradingSymbol, TradingSymbols } from '../models/tradingSymbol';
+import { TradingSymbol, TradingSymbols } from '../models/trading-symbol';
 import { PagedList } from '@app/root/models/paged-list';
 
 export const SYMBOLS_GET_PAGED = '[Symbols] Get Paged Symbols';

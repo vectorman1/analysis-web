@@ -1,0 +1,174 @@
+<div fxFlexFill>
+	<div fxFlex="35" fxLayout="column">
+		<mat-grid-list cols="2" rowHeight="1:1">
+			<mat-grid-tile fxFlexFill>
+				<mat-icon>info</mat-icon> Description:
+			</mat-grid-tile>
+			<mat-grid-tile fxFlexFill>
+				<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="10" [theme]="{
+																'background-color': '#303030',
+																'height': '16px',
+																'margin-bottom': '-3px',
+																'min-width': '120px'
+																}" >
+				</ngx-skeleton-loader>
+				{{(symbolOverviewSubject | async)?.description }}
+			</mat-grid-tile>
+		</mat-grid-list>
+	</div>
+	<div fxFlex fxLayout="column">
+		<div fxFlexFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
+			<div fxLayout="column" fxLayoutAlign="start start" fxFlexFill>
+				<mat-list>
+					<mat-list-item class="mat-list-item-word-wrap">
+						<div mat-line class="prop-label">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<div mat-line>
+									<div fxLayout="row" fxLayoutAlign="start center">
+										<mat-icon>location_on</mat-icon> Address:
+									</div>
+								</div>
+								<div mat-line>
+									<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+																	'background-color': '#303030',
+																	'height': '16px',
+																	'margin-bottom': '-3px',
+																	'min-width': '120px'
+																	}" >
+									</ngx-skeleton-loader>
+									{{(symbolOverviewSubject | async)?.address }}
+								</div>
+							</div>
+						</div>
+					</mat-list-item>
+					<mat-list-item class="mat-list-item-word-wrap">
+						<div mat-line class="prop-label">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<div mat-line>
+									<div fxLayout="row" fxLayoutAlign="start center">
+										<mat-icon>language</mat-icon> Country:
+									</div>
+								</div>
+								<div mat-line>
+									<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+																	'background-color': '#303030',
+																	'height': '16px',
+																	'margin-bottom': '-3px',
+																	'min-width': '40px'
+																	}" >
+									</ngx-skeleton-loader>
+									{{(symbolOverviewSubject | async)?.country }}
+								</div>
+							</div>
+						</div>
+					</mat-list-item>
+					<mat-list-item class="mat-list-item-word-wrap">
+						<div mat-line class="prop-label">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<div mat-line>
+									<div fxLayout="row" fxLayoutAlign="start center">
+										<mat-icon>pie_chart</mat-icon> Sector:
+									</div>
+								</div>
+								<div mat-line>
+									<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+																	'background-color': '#303030',
+																	'height': '16px',
+																	'margin-bottom': '-3px',
+																	'min-width': '60px'
+																	}" >
+									</ngx-skeleton-loader>
+									{{(symbolOverviewSubject | async)?.sector }}
+								</div>
+							</div>
+						</div>
+					</mat-list-item>
+					<mat-list-item class="mat-list-item-word-wrap">
+						<div mat-line class="prop-label">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<div mat-line>
+									<div fxLayout="row" fxLayoutAlign="start center">
+										<mat-icon>domain</mat-icon> Industry:
+									</div>
+								</div>
+								<div mat-line>
+									<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+																	'background-color': '#303030',
+																	'height': '16px',
+																	'margin-bottom': '-3px',
+																	'min-width': '90px'
+																	}" >
+									</ngx-skeleton-loader>
+									{{(symbolOverviewSubject | async)?.industry }}
+								</div>
+							</div>
+						</div>
+					</mat-list-item>
+					<mat-list-item class="mat-list-item-word-wrap">
+						<div mat-line class="prop-label">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<div mat-line>
+									<div fxLayout="row" fxLayoutAlign="start center">
+										<mat-icon>person</mat-icon> Full Time Employees:
+									</div>
+								</div>
+								<div mat-line>
+									<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+																	'background-color': '#303030',
+																	'height': '16px',
+																	'margin-bottom': '-3px',
+																	'min-width': '50px'
+																	}" >
+									</ngx-skeleton-loader>
+									{{(symbolOverviewSubject | async)?.fullTimeEmployees }}
+								</div>
+							</div>
+						</div>
+					</mat-list-item>
+					<mat-list-item class="mat-list-item-word-wrap">
+						<div mat-line class="prop-label">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<div mat-line>
+									<div fxLayout="row" fxLayoutAlign="start center">
+										<mat-icon>date_range</mat-icon> Fiscal Year End:
+									</div>
+								</div>
+								<div mat-line>
+									<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+																	'background-color': '#303030',
+																	'height': '16px',
+																	'margin-bottom': '-3px',
+																	'min-width': '40px'
+																	}" >
+									</ngx-skeleton-loader>
+									{{(symbolOverviewSubject | async)?.fiscalYearEnd }}
+								</div>
+							</div>
+						</div>
+					</mat-list-item>
+					<mat-list-item class="mat-list-item-word-wrap">
+						<div mat-line class="prop-label">
+							<div fxLayout="row" fxLayoutAlign="start center">
+								<div mat-line>
+									<div fxLayout="row" fxLayoutAlign="start center">
+										<mat-icon>event</mat-icon> Latest Quarter:
+									</div>
+								</div>
+								<div mat-line>
+									<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
+																	'background-color': '#303030',
+																	'height': '16px',
+																	'margin-bottom': '-3px',
+																	'min-width': '40px'
+																	}" >
+									</ngx-skeleton-loader>
+									{{(symbolOverviewSubject | async)?.latestQuarter | date }}
+								</div>
+							</div>
+						</div>
+					</mat-list-item>
+				</mat-list>
+			</div>
+		</div>
+	</div>
+</div>

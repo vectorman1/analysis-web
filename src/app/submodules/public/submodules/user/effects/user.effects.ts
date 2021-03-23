@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { UserService } from '@app/public/submodules/user/services/user.service';
+import { IdentityService } from '@app/public/submodules/user/services/identity.service';
 import {
 	USER_LOGIN,
 	userLoginFailure,
@@ -40,7 +40,7 @@ export class UserEffects {
 	userLogin$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(USER_LOGIN),
-			debounceTime(APP_CONSTANTS.REQUEST_THROTTLE_MS),
+			debounceTime(APP_CONSTANTS.REQUEST_DEBOUNCE_MS),
 			exhaustMap((req: LoginRequest) =>
 				this.userService.login(req).pipe(
 					map((response: LoginResponse) => {
@@ -66,7 +66,7 @@ export class UserEffects {
 	userRegister$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(USER_REGISTER),
-			debounceTime(APP_CONSTANTS.REQUEST_THROTTLE_MS),
+			debounceTime(APP_CONSTANTS.REQUEST_DEBOUNCE_MS),
 			exhaustMap((req: RegisterRequest) =>
 				this.userService.register(req).pipe(
 					map((res: RegisterResponse) => {
@@ -84,7 +84,7 @@ export class UserEffects {
 
 	constructor(
 		private actions$: Actions,
-		private userService: UserService,
+		private userService: IdentityService,
 		private jwtService: JwtService
 	) {}
 }

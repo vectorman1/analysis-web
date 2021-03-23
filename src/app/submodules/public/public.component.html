@@ -8,9 +8,9 @@
 					<a mat-button [routerLink]="'/private'">Platform</a>
 				</div>
 				<div fxFlex fxLayout="row" fxLayoutAlign="end">
-					<a mat-button [routerLink]="'/public/user/login'" *ngIf="!(isLoggedIn$ | async)">Login</a>
-					<a mat-button [routerLink]="'/public/user/register'" *ngIf="!(isLoggedIn$ | async)">Register</a>
-					<a mat-button (click)="logout()" *ngIf="(isLoggedIn$ | async)">Log out</a>
+					<a mat-button [routerLink]="'/public/user/login'" *ngIf="!(isLoggedInSubject | async)">Login</a>
+					<a mat-button [routerLink]="'/public/user/register'" *ngIf="!(isLoggedInSubject | async)">Register</a>
+					<a mat-button (click)="logout()" *ngIf="(isLoggedInSubject | async)">Log out</a>
 				</div>
 			</div>
 		</mat-toolbar>

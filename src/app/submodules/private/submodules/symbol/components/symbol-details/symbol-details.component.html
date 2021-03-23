@@ -21,7 +21,7 @@
 
 	<div fxLayout="row" fxFlex fxLayoutAlign="center stretch">
 		<div fxFlexFill>
-			<mat-card fxLayout="column" fxLayoutAlign="start stretch" fxFlexFill>
+			<mat-card fxLayout="column" fxLayoutAlign="start stretch" fxFlexFill >
 				<mat-card-header fxFlex="10" fxLayout="row">
 					<mat-card-title>
 						<div class="identifier-container">
@@ -31,7 +31,7 @@
 								'margin-bottom': '0px'
 							}">
 							</ngx-skeleton-loader>
-							{{(symbolDetailsSubject | async)?.symbol?.identifier }}
+							{{(symbolItemSubject | async)?.identifier }}
 						</div>
 					</mat-card-title>
 					<mat-card-subtitle>
@@ -42,7 +42,7 @@
 								'margin-bottom': '0px'
 							}">
 							</ngx-skeleton-loader>
-							{{(symbolDetailsSubject | async)?.symbol?.name }}
+							{{(symbolItemSubject | async)?.name }}
 						</div>
 						<div class="market-container">
 							<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
@@ -51,197 +51,18 @@
 								'margin-bottom': '0px'
 							}" >
 							</ngx-skeleton-loader>
-							{{(symbolDetailsSubject | async)?.symbol?.marketName }}
+							{{(symbolItemSubject | async)?.marketName }}
 						</div>
 					</mat-card-subtitle>
 				</mat-card-header>
 				<mat-card-content fxFlex>
-					<mat-tab-group mat-stretch-tabs fxFlexFill fxLayoutAlign="start stretch" fxLayout="column" fxLayoutGap="8px" (selectedTabChange)="handleTabChange($event)">
+					<mat-tab-group mat-stretch-tabs dynamicHeight fxFlexFill fxLayoutGap="8px">
 						<mat-tab fxFlex="">
 							<ng-template mat-tab-label>
 								<mat-icon class="tab-icon">folder_open</mat-icon>
 								Overview
 							</ng-template>
-							<div fxFlexFill>
-								<div fxFlex="35" fxLayout="column">
-									<mat-list>
-										<mat-list-item class="mat-list-item-word-wrap">
-											<div mat-line>
-												<div fxLayout="row" fxLayoutAlign="start center">
-													<mat-icon>info</mat-icon> Description:
-												</div>
-											</div>
-											<div mat-line>
-												<p style="padding-top: 5px;" >
-													<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="10" [theme]="{
-																	'background-color': '#303030',
-																	'height': '16px',
-																	'margin-bottom': '-3px',
-																	'min-width': '120px'
-																	}" >
-													</ngx-skeleton-loader>
-													{{(symbolDetailsSubject | async)?.details?.description }}
-												</p>
-											</div>
-										</mat-list-item>
-									</mat-list>
-								</div>
-								<div fxFlex fxLayout="column">
-									<div fxFlexFill fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
-										<div fxLayout="column" fxFlexFill>
-											<mat-list>
-												<mat-list-item class="mat-list-item-word-wrap">
-													<div mat-line class="prop-label">
-														<div fxLayout="row" fxLayoutAlign="start center">
-															<div mat-line>
-																<div fxLayout="row" fxLayoutAlign="start center">
-																	<mat-icon>location_on</mat-icon> Address:
-																</div>
-															</div>
-															<div mat-line>
-																<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
-																	'background-color': '#303030',
-																	'height': '16px',
-																	'margin-bottom': '-3px',
-																	'min-width': '120px'
-																	}" >
-																</ngx-skeleton-loader>
-																{{(symbolDetailsSubject | async)?.details?.address }}
-															</div>
-														</div>
-													</div>
-												</mat-list-item>
-												<mat-list-item class="mat-list-item-word-wrap">
-													<div mat-line class="prop-label">
-														<div fxLayout="row" fxLayoutAlign="start center">
-															<div mat-line>
-																<div fxLayout="row" fxLayoutAlign="start center">
-																	<mat-icon>language</mat-icon> Country:
-																</div>
-															</div>
-															<div mat-line>
-																<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
-																	'background-color': '#303030',
-																	'height': '16px',
-																	'margin-bottom': '-3px',
-																	'min-width': '40px'
-																	}" >
-																</ngx-skeleton-loader>
-																{{(symbolDetailsSubject | async)?.details?.country }}
-															</div>
-														</div>
-													</div>
-												</mat-list-item>
-												<mat-list-item class="mat-list-item-word-wrap">
-													<div mat-line class="prop-label">
-														<div fxLayout="row" fxLayoutAlign="start center">
-															<div mat-line>
-																<div fxLayout="row" fxLayoutAlign="start center">
-																	<mat-icon>pie_chart</mat-icon> Sector:
-																</div>
-															</div>
-															<div mat-line>
-																<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
-																	'background-color': '#303030',
-																	'height': '16px',
-																	'margin-bottom': '-3px',
-																	'min-width': '60px'
-																	}" >
-																</ngx-skeleton-loader>
-																{{(symbolDetailsSubject | async)?.details?.sector }}
-															</div>
-														</div>
-													</div>
-												</mat-list-item>
-												<mat-list-item class="mat-list-item-word-wrap">
-													<div mat-line class="prop-label">
-														<div fxLayout="row" fxLayoutAlign="start center">
-															<div mat-line>
-																<div fxLayout="row" fxLayoutAlign="start center">
-																	<mat-icon>domain</mat-icon> Industry:
-																</div>
-															</div>
-															<div mat-line>
-																<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
-																	'background-color': '#303030',
-																	'height': '16px',
-																	'margin-bottom': '-3px',
-																	'min-width': '90px'
-																	}" >
-																</ngx-skeleton-loader>
-																{{(symbolDetailsSubject | async)?.details?.industry }}
-															</div>
-														</div>
-													</div>
-												</mat-list-item>
-												<mat-list-item class="mat-list-item-word-wrap">
-													<div mat-line class="prop-label">
-														<div fxLayout="row" fxLayoutAlign="start center">
-															<div mat-line>
-																<div fxLayout="row" fxLayoutAlign="start center">
-																	<mat-icon>person</mat-icon> Full Time Employees:
-																</div>
-															</div>
-															<div mat-line>
-																<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
-																	'background-color': '#303030',
-																	'height': '16px',
-																	'margin-bottom': '-3px',
-																	'min-width': '50px'
-																	}" >
-																</ngx-skeleton-loader>
-																{{(symbolDetailsSubject | async)?.details?.fullTimeEmployees }}
-															</div>
-														</div>
-													</div>
-												</mat-list-item>
-												<mat-list-item class="mat-list-item-word-wrap">
-													<div mat-line class="prop-label">
-														<div fxLayout="row" fxLayoutAlign="start center">
-															<div mat-line>
-																<div fxLayout="row" fxLayoutAlign="start center">
-																	<mat-icon>date_range</mat-icon> Fiscal Year End:
-																</div>
-															</div>
-															<div mat-line>
-																<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
-																	'background-color': '#303030',
-																	'height': '16px',
-																	'margin-bottom': '-3px',
-																	'min-width': '40px'
-																	}" >
-																</ngx-skeleton-loader>
-																{{(symbolDetailsSubject | async)?.details?.fiscalYearEnd }}
-															</div>
-														</div>
-													</div>
-												</mat-list-item>
-												<mat-list-item class="mat-list-item-word-wrap">
-													<div mat-line class="prop-label">
-														<div fxLayout="row" fxLayoutAlign="start center">
-															<div mat-line>
-																<div fxLayout="row" fxLayoutAlign="start center">
-																	<mat-icon>event</mat-icon> Latest Quarter:
-																</div>
-															</div>
-															<div mat-line>
-																<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="{
-																	'background-color': '#303030',
-																	'height': '16px',
-																	'margin-bottom': '-3px',
-																	'min-width': '40px'
-																	}" >
-																</ngx-skeleton-loader>
-																{{(symbolDetailsSubject | async)?.details?.latestQuarter }}
-															</div>
-														</div>
-													</div>
-												</mat-list-item>
-											</mat-list>
-										</div>
-									</div>
-								</div>
-							</div>
+							<app-symbol-overview [symbolUuid]="uuid"></app-symbol-overview>
 						</mat-tab>
 
 
@@ -260,10 +81,7 @@
 								<mat-icon class="tab-icon">insert_chart_outlined</mat-icon>
 								Price Action
 							</ng-template>
-							<div fxFlexFill fxLayoutAlign="center center" *ngIf="isChartLoadingSubject | async">
-								<mat-spinner></mat-spinner>
-							</div>
-							<div echarts [options]="priceActionChartOptions" *ngIf="!(isChartLoadingSubject | async)"></div>
+							<app-symbol-chart [symbolUuid]="this.uuid"></app-symbol-chart>
 						</mat-tab>
 					</mat-tab-group>
 				</mat-card-content>

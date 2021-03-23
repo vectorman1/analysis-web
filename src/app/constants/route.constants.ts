@@ -7,8 +7,9 @@ export const API_ROUTES = {
 		HOME: setRoute('aggregate'), // TODO Pass request params for aggregate
 	},
 	SYMBOL: {
+		ITEM: (uuid: string) => setRoute(`symbols/${uuid}`),
 		PAGED: setRoute('symbols/paged'),
-		DETAILS: (uuid: string) => setRoute(`symbols/${uuid}/details`),
+		OVERVIEW: (uuid: string) => setRoute(`symbols/${uuid}/overview`),
 	},
 	USER: {
 		LOGIN: setRoute('users/login'),
@@ -30,6 +31,15 @@ export const PRIVATE_ROUTES = {
 		BASE: `symbol`,
 		LIST: `list`,
 		DETAILS: `:uuid/details`,
+	},
+	ADMIN: {
+		BASE: `admin`,
+		USER: {
+			BASE: `user`,
+			LIST: `list`,
+			CREATE: `create`,
+			EDIT: `:uuid/details`,
+		},
 	},
 };
 

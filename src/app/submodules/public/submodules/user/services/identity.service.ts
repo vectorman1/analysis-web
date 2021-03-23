@@ -11,7 +11,7 @@ import { RegisterResponse } from '@app/public/submodules/user/models/register-re
 @Injectable({
 	providedIn: 'root',
 })
-export class UserService {
+export class IdentityService {
 	constructor(private http: HttpClient) {}
 
 	saveToken(token: string) {

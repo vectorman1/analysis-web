@@ -8,20 +8,17 @@ import {
 	switchMap,
 } from 'rxjs/operators';
 import { PagedRequest } from '@app/shared/models/request';
-import { TradingSymbol } from '@app/submodules/symbol/models/tradingSymbol';
+import { TradingSymbol } from '@app/submodules/symbol/models/trading-symbol';
 import { ServerError } from '@app/shared/models/server-error';
 import { of } from 'rxjs';
 import { PagedList } from '@app/root/models/paged-list';
 import { APP_CONSTANTS } from '@app/root/constants/app.constants';
 import {
-	SYMBOLS_GET_DETAILS,
-	symbolsGetDetailsFailure,
-	symbolsGetDetailsSuccess,
-} from '@app/submodules/symbol/actions/symbol-get-details.actions';
-import {
-	SymbolDetails,
-	SymbolDetailsRequest,
-} from '@app/submodules/symbol/models/symbol-details';
+	SYMBOLS_GET_OVERVIEW,
+	symbolsGetOverviewFailure,
+	symbolsGetOverviewSuccess,
+} from '@app/submodules/symbol/actions/symbol-get-overview.actions';
+import { SymbolOverviewRequest } from '@app/submodules/symbol/models/symbol-overview-request';
 import {
 	SYMBOLS_GET_PAGED,
 	symbolsGetPagedFailure,
@@ -38,13 +35,37 @@ import {
 	SymbolChartRequest,
 	SymbolChart,
 } from '@app/submodules/symbol/models/symbol-chart';
+import {
+	SYMBOLS_GET,
+	symbolsGetFailure,
+	symbolsGetSuccess,
+} from '@app/submodules/symbol/actions/symbol-get.actions';
+import { SymbolRequest } from '@app/submodules/symbol/models/symbol-request';
+import { SymbolOverview } from '@app/submodules/symbol/models/symbol-overview';
 
 @Injectable()
 export class SymbolEffects {
-	symbols$ = createEffect(() =>
+	symbol$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(SYMBOLS_GET),
+			debounceTime(APP_CONSTANTS.REQUEST_DEBOUNCE_MS),
+			exhaustMap((req: SymbolRequest) =>
+				this.symbolsService.get(req.uuid).pipe(
+					map(
+						(response: TradingSymbol) =>
+							symbolsGetSuccess(response),
+						catchError((err: ServerError) =>
+							of(symbolsGetFailure(err))
+						)
+					)
+				)
+			)
+		)
+	);
+	symbolsPaged$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(SYMBOLS_GET_PAGED),
-			debounceTime(APP_CONSTANTS.REQUEST_THROTTLE_MS),
+			debounceTime(APP_CONSTANTS.REQUEST_DEBOUNCE_MS),
 			exhaustMap((req: PagedRequest) =>
 				this.symbolsService.getPaged(req).pipe(
 					map((response: PagedList<TradingSymbol>) =>
@@ -60,15 +81,15 @@ export class SymbolEffects {
 
 	symbolDetails$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(SYMBOLS_GET_DETAILS),
-			debounceTime(APP_CONSTANTS.REQUEST_THROTTLE_MS),
-			exhaustMap((req: SymbolDetailsRequest) =>
-				this.symbolsService.getDetails(req.uuid).pipe(
-					map((response: SymbolDetails) =>
-						symbolsGetDetailsSuccess(response)
+			ofType(SYMBOLS_GET_OVERVIEW),
+			debounceTime(APP_CONSTANTS.REQUEST_DEBOUNCE_MS),
+			exhaustMap((req: SymbolOverviewRequest) =>
+				this.symbolsService.getOverview(req.uuid).pipe(
+					map((response: SymbolOverview) =>
+						symbolsGetOverviewSuccess(response)
 					),
 					catchError((err: ServerError) =>
-						of(symbolsGetDetailsFailure(err))
+						of(symbolsGetOverviewFailure(err))
 					)
 				)
 			)
@@ -78,7 +99,7 @@ export class SymbolEffects {
 	symbolChart$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(SYMBOLS_GET_CHART),
-			debounceTime(APP_CONSTANTS.REQUEST_THROTTLE_MS),
+			debounceTime(APP_CONSTANTS.REQUEST_DEBOUNCE_MS),
 			switchMap((req: SymbolChartRequest) =>
 				this.symbolsService.getChart(req).pipe(
 					map((response: SymbolChart) =>

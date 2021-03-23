@@ -26,12 +26,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { SymbolService } from '@app/submodules/symbol/services/symbol.service';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SymbolChartComponent } from './components/symbol-chart/symbol-chart.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { SymbolOverviewComponent } from './components/symbol-overview/symbol-overview.component';
 
 @NgModule({
 	declarations: [
 		SymbolsListComponent,
 		SymbolDetailsComponent,
 		SymbolComponent,
+		SymbolChartComponent,
+		SymbolOverviewComponent,
 	],
 	imports: [
 		CommonModule,
@@ -56,6 +64,10 @@ import { SymbolService } from '@app/submodules/symbol/services/symbol.service';
 		MatFormFieldModule,
 		MatInputModule,
 		FormsModule,
+		MatExpansionModule,
+		MatCheckboxModule,
+		MatRadioModule,
+		NgScrollbarModule,
 	],
 	providers: [SymbolService],
 })

@@ -6,7 +6,7 @@ import { select, Store } from '@ngrx/store';
 import {
 	TradingSymbol,
 	TradingSymbols,
-} from '@app/submodules/symbol/models/tradingSymbol';
+} from '@app/submodules/symbol/models/trading-symbol';
 import { PagedRequest } from '@app/shared/models/request';
 import { ServerItem } from '@app/root/models/server-item.model';
 import { symbolsGetPaged } from '@app/submodules/symbol/actions/symbol-get-paged.actions';

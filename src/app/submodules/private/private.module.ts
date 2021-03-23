@@ -9,6 +9,7 @@ import { PrivateComponent } from '@app/private/private.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FlexModule } from '@angular/flex-layout';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @NgModule({
 	declarations: [PrivateComponent],
@@ -22,6 +23,7 @@ import { FlexModule } from '@angular/flex-layout';
 		MatButtonModule,
 		MatGridListModule,
 		FlexModule,
+		NgScrollbarModule,
 	],
 	exports: [PrivateComponent],
 	providers: [],
