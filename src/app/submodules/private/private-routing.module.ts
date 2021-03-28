@@ -12,7 +12,7 @@ const routes: Routes = [
 		children: [
 			{
 				path: '',
-				redirectTo: PRIVATE_ROUTES.DASHBOARD.BASE,
+				redirectTo: PRIVATE_ROUTES.SYMBOL.BASE,
 				pathMatch: 'full',
 			},
 			{

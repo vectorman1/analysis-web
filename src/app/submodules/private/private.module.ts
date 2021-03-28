@@ -10,9 +10,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FlexModule } from '@angular/flex-layout';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { AppIdentityRequirementDirective } from './directives/app-identity-requirement.directive';
 
 @NgModule({
-	declarations: [PrivateComponent],
+	declarations: [PrivateComponent, AppIdentityRequirementDirective],
 	imports: [
 		PrivateRoutingModule,
 		MatSidenavModule,
