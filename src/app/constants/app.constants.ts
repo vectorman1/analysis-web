@@ -57,4 +57,24 @@ export const APP_CONSTANTS = {
 		DEFAULT: 0,
 		ADMIN: 1,
 	},
+	SKELETON_THEMES: {
+		SHORT: {
+			'background-color': '#303030',
+			height: '16px',
+			'margin-bottom': '-3px',
+			'min-width': '40px',
+		},
+		MEDIUM: {
+			'background-color': '#303030',
+			height: '16px',
+			'margin-bottom': '-3px',
+			'min-width': '80px',
+		},
+		LONG: {
+			'background-color': '#303030',
+			height: '16px',
+			'margin-bottom': '-3px',
+			'min-width': '120px',
+		},
+	},
 };
