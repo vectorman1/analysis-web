@@ -25,7 +25,7 @@ import {
 	userLogoutFailure,
 	userLogoutSuccess,
 } from '@app/public/submodules/user/actions/user-logout.actions';
-import { User } from '@app/public/submodules/user/models/user';
+import { TokenUser } from '@app/public/submodules/user/models/tokenUser';
 import { JwtService } from '@app/public/submodules/user/services/jwt.service';
 import {
 	USER_REGISTER,
@@ -46,7 +46,7 @@ export class UserEffects {
 					map((response: LoginResponse) => {
 						this.userService.saveToken(response.token);
 						let user = this.jwtService.getUser(response.token);
-						return userLoginSuccess(user as User);
+						return userLoginSuccess(user as TokenUser);
 					}),
 					catchError((err: ServerError) => of(userLoginFailure(err)))
 				)
@@ -72,7 +72,7 @@ export class UserEffects {
 					map((res: RegisterResponse) => {
 						this.userService.saveToken(res.token);
 						let user = this.jwtService.getUser(res.token);
-						return userRegisterSuccess(user as User);
+						return userRegisterSuccess(user as TokenUser);
 					}),
 					catchError((err: ServerError) =>
 						of(userRegisterFailure(err))
