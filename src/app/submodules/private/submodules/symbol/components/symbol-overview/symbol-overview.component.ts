@@ -8,6 +8,7 @@ import { selectSymbolOverview } from '@app/submodules/symbol/selectors/symbol.se
 import { mapIsLoading, mapValue } from '@app/root/observable.helpers';
 import { symbolsGetOverview } from '@app/submodules/symbol/actions/symbol-get-overview.actions';
 import { SymbolOverviewRequest } from '@app/submodules/symbol/models/symbol-overview-request';
+import { APP_CONSTANTS } from '@app/root/constants/app.constants';
 
 @Component({
 	selector: 'app-symbol-overview',
@@ -22,6 +23,8 @@ export class SymbolOverviewComponent implements OnInit {
 
 	subscriptions = new Array<Subscription>();
 	symbolOverview$: Observable<ServerItem<SymbolOverview>>;
+
+	SKELETON_THEMES = APP_CONSTANTS.SKELETON_THEMES;
 
 	constructor(private store: Store<AppState>) {
 		this.symbolOverview$ = this.store.select(selectSymbolOverview);
