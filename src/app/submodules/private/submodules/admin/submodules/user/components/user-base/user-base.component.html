@@ -1,0 +1,14 @@
+<div fxFlex="33" *ngFor="let list of optionLists;" class="admin-options">
+	<mat-list>
+		<mat-list-item *ngFor="let option of list;" [routerLink]="option.route" class="admin-option" matRipple>
+			<fa-icon mat-list-icon *ngIf="!option.isMatIcon" [icon]="option.faIcon"></fa-icon>
+			<mat-icon mat-list-icon *ngIf="option.isMatIcon">{{option.matIcon}}</mat-icon>
+			<div mat-line>
+				{{option.title}}
+			</div>
+			<div mat-line>
+				{{option.subtitle}}
+			</div>
+		</mat-list-item>
+	</mat-list>
+</div>
