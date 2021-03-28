@@ -12,8 +12,11 @@ export const API_ROUTES = {
 		OVERVIEW: (uuid: string) => setRoute(`symbols/${uuid}/overview`),
 	},
 	USER: {
+		BASE: setRoute('users'),
 		LOGIN: setRoute('users/login'),
 		REGISTER: setRoute('users/register'),
+		BY_UUID: (uuid: string) => setRoute(`users/${uuid}`),
+		PAGED: setRoute(`users/paged`),
 	},
 	HISTORIES: {
 		CHART: (uuid: string) => setRoute(`histories/${uuid}/chart`),
