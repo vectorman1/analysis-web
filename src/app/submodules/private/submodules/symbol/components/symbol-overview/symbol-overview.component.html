@@ -17,50 +17,80 @@
 		<mat-list fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="-8px">
 			<mat-list-item class="mat-list-item-word-wrap">
 				<mat-icon mat-list-icon>location_on</mat-icon>
-				Location:
+				<span class="prop-label">
+					Location:
+				</span>
 				<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="SKELETON_THEMES.LONG" >
 				</ngx-skeleton-loader>
-				{{(symbolOverviewSubject | async)?.address }}
+				<span class="prop-value">
+					{{(symbolOverviewSubject | async)?.address }}
+				</span>
 			</mat-list-item>
 			<mat-list-item class="mat-list-item-word-wrap">
 				<mat-icon mat-list-icon>language</mat-icon>
-				Country:
+				<span class="prop-label">
+					Country:
+				</span>
 				<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="SKELETON_THEMES.SHORT" >
 				</ngx-skeleton-loader>
-				{{(symbolOverviewSubject | async)?.country }}
+				<span class="prop-value">
+					{{(symbolOverviewSubject | async)?.country }}
+				</span>
 			</mat-list-item>
 			<mat-list-item class="mat-list-item-word-wrap">
 				<mat-icon mat-list-icon>pie_chart</mat-icon>
-				Sector:
+				<span class="prop-label">
+					Sector:
+				</span>
 				<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="SKELETON_THEMES.MEDIUM" >
 				</ngx-skeleton-loader>
-				{{(symbolOverviewSubject | async)?.sector }}
+				<span class="prop-value">
+					{{(symbolOverviewSubject | async)?.sector }}
+				</span>
 			</mat-list-item>
 			<mat-list-item class="mat-list-item-word-wrap">
 				<mat-icon mat-list-icon>domain</mat-icon>
-				Industry:
+				<span class="prop-label">
+					Industry:
+				</span>
 				<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="SKELETON_THEMES.MEDIUM" >
 				</ngx-skeleton-loader>
-				{{(symbolOverviewSubject | async)?.industry }}
+				<span class="prop-value">
+					{{(symbolOverviewSubject | async)?.industry }}
+				</span>
 			</mat-list-item>
 			<mat-list-item class="mat-list-item-word-wrap">
 				<mat-icon mat-list-icon>person</mat-icon>
-				Full Time Employees:
+				<span class="prop-label">
+					Full Time Employees:
+				</span>
 				<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="SKELETON_THEMES.SHORT" >
 				</ngx-skeleton-loader>
-				{{(symbolOverviewSubject | async)?.fullTimeEmployees }}
+				<span class="prop-value">
+					{{(symbolOverviewSubject | async)?.fullTimeEmployees }}
+				</span>
 			</mat-list-item>
 			<mat-list-item class="mat-list-item-word-wrap">
-				<mat-icon mat-list-icon>date_range</mat-icon> Fiscal Year End:
+				<mat-icon mat-list-icon>date_range</mat-icon>
+				<span class="prop-label">
+					Fiscal Year End:
+				</span>
 				<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="SKELETON_THEMES.SHORT" >
 				</ngx-skeleton-loader>
-				{{(symbolOverviewSubject | async)?.fiscalYearEnd }}
+				<span class="prop-value">
+					{{(symbolOverviewSubject | async)?.fiscalYearEnd }}
+				</span>
 			</mat-list-item>
 			<mat-list-item class="mat-list-item-word-wrap">
-				<mat-icon mat-list-icon>event</mat-icon> Latest Quarter:
+				<mat-icon mat-list-icon>event</mat-icon>
+				<span class="prop-label">
+					Latest Quarter:
+				</span>
 				<ngx-skeleton-loader *ngIf="isLoadingSubject | async" count="1" [theme]="SKELETON_THEMES.SHORT" >
 				</ngx-skeleton-loader>
-				{{(symbolOverviewSubject | async)?.latestQuarter | date }}
+				<span class="prop-value">
+					{{(symbolOverviewSubject | async)?.latestQuarter | date }}
+				</span>
 			</mat-list-item>
 		</mat-list>
 	</div>
