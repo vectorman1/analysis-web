@@ -1,7 +1,7 @@
 <div fxLayout="column"
 	 fxLayoutGap="16px">
 	<div fxLayout="row">
-		<div fxFlex="33" *ngFor="let list of optionLists;" matRipple class="admin-options">
+		<div [fxFlex]="100 / optionLists.length" *ngFor="let list of optionLists;" matRipple class="admin-options">
 			<mat-list>
 				<mat-list-item *ngFor="let option of list;" [routerLink]="option.route" class="admin-option">
 					<fa-icon mat-list-icon *ngIf="!option.isMatIcon" [icon]="option.faIcon"></fa-icon>
