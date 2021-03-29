@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { ServerItem } from '@app/root/models/server-item.model';
 import { PagedList } from '@app/root/models/paged-list';
-import { User } from '@app/submodules/admin/submodules/user/models/user';
+import { User } from '@app/submodules/admin/submodules/admin-user/models/user';
 import {
 	serverCallFailure,
 	serverCallStart,
@@ -12,14 +12,14 @@ import {
 	userGetPagedFailure,
 	userGetPagedReset,
 	userGetPagedSuccess,
-} from '@app/private/submodules/admin/submodules/user/actions/user-get-paged.actions.ts';
+} from '@app/submodules/admin/submodules/admin-user/actions/admin-user-get-paged.actions.ts';
 
 import {
 	userGet,
 	userGetFailure,
 	userGetReset,
 	userGetSuccess,
-} from '@app/private/submodules/admin/submodules/user/actions/user-get.actions';
+} from '@app/submodules/admin/submodules/admin-user/actions/admin-user-get.actions';
 
 export const adminUserFeatureKey = 'adminUser';
 

@@ -3,7 +3,7 @@ import { AppState } from '@app/root/reducers';
 import {
 	adminUserFeatureKey,
 	AdminUserState,
-} from '@app/submodules/admin/submodules/user/reducers/user.reducer';
+} from '@app/submodules/admin/submodules/admin-user/reducers/admin-user.reducer';
 
 const selectAdminUser = createFeatureSelector<AppState, AdminUserState>(
 	adminUserFeatureKey

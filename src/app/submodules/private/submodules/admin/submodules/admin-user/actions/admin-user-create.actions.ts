@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from '@app/submodules/admin/submodules/user/models/user';
+import { User } from '@app/submodules/admin/submodules/admin-user/models/user';
 import { ServerError } from '@app/shared/models/server-error';
 
 export const USER_CREATE = '[User] Create Users';

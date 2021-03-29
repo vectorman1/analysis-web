@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { ServerError } from '@app/shared/models/server-error';
-import { User } from '@app/submodules/admin/submodules/user/models/user';
+import { User } from '@app/submodules/admin/submodules/admin-user/models/user';
 
 export const USER_GET = '[User] Get User';
 export const USER_GET_SUCCESS = '[User] Get User Success';

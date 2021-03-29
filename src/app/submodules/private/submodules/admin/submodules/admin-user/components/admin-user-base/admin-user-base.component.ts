@@ -3,11 +3,11 @@ import { AdministrationOptionModel } from '@app/submodules/admin/models/administ
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-	selector: 'app-user-base',
-	templateUrl: './user-base.component.html',
-	styleUrls: ['./user-base.component.scss'],
+	selector: 'app-admin-user-base',
+	templateUrl: './admin-user-base.component.html',
+	styleUrls: ['./admin-user-base.component.scss'],
 })
-export class UserBaseComponent implements OnInit {
+export class AdminUserBaseComponent implements OnInit {
 	optionLists: AdministrationOptionModel[][] = [
 		[
 			{
@@ -23,7 +23,7 @@ export class UserBaseComponent implements OnInit {
 				isMatIcon: true,
 				faIcon: faCoffee,
 				title: 'Create',
-				subtitle: 'Create a new user',
+				subtitle: 'Create a new admin-user',
 				route: './create',
 			},
 		],

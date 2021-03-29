@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { ServerError } from '@app/shared/models/server-error';
 import { PagedList } from '@app/root/models/paged-list';
-import { User } from '@app/submodules/admin/submodules/user/models/user';
+import { User } from '@app/submodules/admin/submodules/admin-user/models/user';
 import { PagedRequest } from '@app/shared/models/request';
 
 export const USER_GET_PAGED = '[User] Get Paged Users';

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '@app/submodules/admin/submodules/user/models/user';
+import { User } from '@app/submodules/admin/submodules/admin-user/models/user';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { APP_CONSTANTS } from '@app/root/constants/app.constants';
