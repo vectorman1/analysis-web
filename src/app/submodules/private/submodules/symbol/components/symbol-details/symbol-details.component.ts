@@ -1,42 +1,13 @@
-import {
-	AfterViewInit,
-	Component,
-	OnDestroy,
-	OnInit,
-	ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/root/reducers';
-import {
-	symbolsGetOverview,
-	symbolsGetOverviewReset,
-} from '@app/submodules/symbol/actions/symbol-get-overview.actions';
-import { SymbolOverviewRequest } from '@app/submodules/symbol/models/symbol-overview-request';
 import { BehaviorSubject, Observable, ReplaySubject, Subscription } from 'rxjs';
-import {
-	selectSymbolChart,
-	selectSymbolItem,
-} from '@app/submodules/symbol/selectors/symbol.selectors';
+import { selectSymbolItem } from '@app/submodules/symbol/selectors/symbol.selectors';
 import { ServerItem } from '@app/root/models/server-item.model';
 import { mapIsLoading, mapValue } from '@app/root/observable.helpers';
-import { filter, tap } from 'rxjs/operators';
-import { CandlestickSeriesOption, EChartsOption } from 'echarts';
-import {
-	symbolsGetChart,
-	symbolsGetChartReset,
-} from '@app/submodules/symbol/actions/symbol-get-chart.actions';
-import {
-	SymbolChart,
-	SymbolChartRequest,
-} from '@app/submodules/symbol/models/symbol-chart';
-import { NgxEchartsDirective } from 'ngx-echarts';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 import { TradingSymbol } from '@app/submodules/symbol/models/trading-symbol';
-import {
-	symbolsGet,
-	symbolsGetReset,
-} from '@app/submodules/symbol/actions/symbol-get.actions';
+import { symbolsGet } from '@app/submodules/symbol/actions/symbol-get.actions';
 import { SymbolRequest } from '@app/submodules/symbol/models/symbol-request';
 
 @Component({
