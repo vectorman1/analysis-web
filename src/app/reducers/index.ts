@@ -2,7 +2,7 @@ import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import * as fromUser from '@app/public/submodules/user/reducers/user.reducer';
 import * as fromSymbol from '@app/submodules/symbol/reducers/symbol.reducer';
 import * as fromDashboard from '@app/submodules/dashboard/reducers/dashboard.reducer';
-import * as fromAdminUser from '@app/submodules/admin/submodules/user/reducers/user.reducer';
+import * as fromAdminUser from '@app/submodules/admin/submodules/admin-user/reducers/admin-user.reducer';
 
 import { environment } from '@env/environment';
 

@@ -19,8 +19,8 @@ const routes: Routes = [
 			{
 				path: PRIVATE_ROUTES.ADMIN.USER.BASE,
 				loadChildren: () =>
-					import('./submodules/user/user.module').then(
-						(m) => m.UserModule
+					import('./submodules/admin-user/admin-user.module').then(
+						(m) => m.AdminUserModule
 					),
 			},
 		],
