@@ -21,6 +21,10 @@ import { SymbolState } from '@app/submodules/symbol/reducers/symbol.reducer';
 import { AppState } from '@app/root/reducers';
 import { PagedRequest } from '@app/shared/models/request';
 import { isNullOrUndefined } from '@app/root/utils';
+import { PagedTableConfig } from '@app/shared/models/paged-table-config';
+import { selectSymbolList } from '@app/submodules/symbol/selectors/symbol.selectors';
+import { PagedTableDatasource } from '@app/shared/components/paged-table/paged-table.datasource';
+import { PagedTableComponent } from '@app/shared/components/paged-table/paged-table.component';
 
 @Component({
 	selector: 'app-symbols-list',
@@ -31,64 +35,90 @@ import { isNullOrUndefined } from '@app/root/utils';
 	},
 })
 export class SymbolsListComponent implements AfterViewInit, OnInit {
-	@ViewChild(MatPaginator)
-	paginator!: MatPaginator;
-	@ViewChild(MatSort)
-	sort: MatSort = new MatSort();
-	@ViewChild(MatTable)
-	table!: MatTable<TradingSymbol>;
-	dataSource!: TradingSymbolsListDataSource;
+	@ViewChild(PagedTableComponent) table!: PagedTableComponent;
+
+	dataSource!: PagedTableDatasource;
 	req!: PagedRequest;
 	searchString!: string;
+	tableConfig: PagedTableConfig;
 
-	constructor(private store: Store<AppState>) {}
-
-	/** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-	displayedColumns = [
-		'isin',
-		'identifier',
-		'name',
-		'currency_code',
-		'minimum_order_quantity',
-		'market_name',
-		'market_hours_gmt',
-		'created_at',
-	];
-
-	ngOnInit(): void {
-		this.dataSource = new TradingSymbolsListDataSource(this.store);
+	constructor() {
+		this.tableConfig = {
+			initialDirection: 'desc',
+			paginator: [],
+			initialSort: 'createdAt',
+			storeSelector: selectSymbolList,
+			loadAction: symbolsGetPaged,
+			columns: [
+				{
+					name: 'isin',
+					displayName: 'ISIN',
+					width: '10%',
+					isLink: false,
+					routerLink: [],
+				},
+				{
+					name: 'identifier',
+					displayName: 'Identifier',
+					width: '5%',
+					isLink: false,
+					routerLink: ['/private/symbol', 'details'],
+				},
+				{
+					name: 'name',
+					displayName: 'Name',
+					width: '25%',
+					isLink: false,
+					routerLink: [],
+				},
+				{
+					name: 'currencyCode',
+					displayName: 'Currency Code',
+					width: '5%',
+					isLink: false,
+					routerLink: [],
+				},
+				{
+					name: 'minimumOrderQuantity',
+					displayName: 'Minimum Order Quantity',
+					width: '10%',
+					isLink: false,
+					routerLink: [],
+				},
+				{
+					name: 'marketName',
+					displayName: 'Market Name',
+					width: '15%',
+					isLink: false,
+					routerLink: [],
+				},
+				{
+					name: 'marketHoursGmt',
+					displayName: 'Market Hours (GMT)',
+					width: '10%',
+					isLink: false,
+					routerLink: [],
+				},
+				{
+					name: 'createdAt',
+					displayName: 'Created At',
+					width: '30%',
+					isLink: false,
+					routerLink: [],
+				},
+			],
+		};
 	}
+
+	ngOnInit(): void {}
 
 	ngOnDestroy(): void {}
 
 	ngAfterViewInit(): void {
-		this.dataSource.paginator = this.paginator;
-		this.dataSource.sort = this.sort;
-
-		this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
-
-		merge(this.sort.sortChange, this.paginator.page)
-			.pipe(
-				tap(() => {
-					this.loadSymbolsPage();
-				})
-			)
-			.subscribe();
-
-		this.loadSymbolsPage();
+		this.refreshTable();
 	}
 
-	loadSymbolsPage() {
-		this.req = {
-			filter: {
-				pageNumber: this.paginator.pageIndex + 1,
-				pageSize: this.paginator.pageSize,
-				order: this.sort.active,
-				ascending: this.sort.direction === 'asc',
-				text: this.searchString,
-			},
-		};
-
-		this.dataSource.loadSymbols(this.req);
+	refreshTable() {
+		this.table.loadItems();
 	}
 }

@@ -32,6 +32,7 @@ import { SymbolChartComponent } from './components/symbol-chart/symbol-chart.com
 import { MatRadioModule } from '@angular/material/radio';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SymbolOverviewComponent } from './components/symbol-overview/symbol-overview.component';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -68,6 +69,7 @@ import { SymbolOverviewComponent } from './components/symbol-overview/symbol-ove
 		MatCheckboxModule,
 		MatRadioModule,
 		NgScrollbarModule,
+		SharedModule,
 	],
 	providers: [SymbolService],
 })
