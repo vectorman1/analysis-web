@@ -5,6 +5,8 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AppState } from '@app/root/reducers';
 import { Store } from '@ngrx/store';
 import { userLogout } from '@app/public/submodules/user/actions/user-logout.actions';
+import { PrivateRole } from '@app/public/submodules/user/models/privateRole';
+import { APP_CONSTANTS } from '@app/root/constants/app.constants';
 
 @Component({
 	selector: 'app-private',
@@ -21,6 +23,8 @@ export class PrivateComponent {
 			map((result) => result.matches),
 			shareReplay()
 		);
+
+	roles = APP_CONSTANTS.ROLES;
 
 	constructor(
 		private breakpointObserver: BreakpointObserver,

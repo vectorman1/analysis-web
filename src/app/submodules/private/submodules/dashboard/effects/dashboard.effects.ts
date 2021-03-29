@@ -15,7 +15,7 @@ export class DashboardEffects {
 	newestSymbols$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(dashboardGetNewestSymbols),
-			debounceTime(APP_CONSTANTS.REQUEST_THROTTLE_MS),
+			debounceTime(APP_CONSTANTS.REQUEST_DEBOUNCE_MS),
 			switchMap((req: PagedRequest) =>
 				this.symbolService.getPaged(req).pipe(
 					map((list) => dashboardGetNewestSymbolsSuccess(list)),

@@ -10,14 +10,6 @@
 	margin-right: 8px;
 }
 
-.content {
-	padding: 16px;
-}
-
-.nm {
-	margin: 0;
-}
-
 /* SCSS */
 .mat-list-item.mat-list-item-word-wrap {
 	height: initial !important;
@@ -27,6 +19,11 @@
 	}
 }
 
-.prop-label {
-	min-width: 120px;
+.no-overflow {
+	overflow: visible;
+}
+
+.apply-indicators {
+	margin-top: 8px;
+	text-align: right;
 }

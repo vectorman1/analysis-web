@@ -13,7 +13,7 @@ import { reducers } from '@app/root/reducers';
 import * as fromState from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { UserService } from '@app/public/submodules/user/services/user.service';
+import { IdentityService } from '@app/public/submodules/user/services/identity.service';
 import { JwtService } from '@app/public/submodules/user/services/jwt.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorToastInterceptor } from '@app/root/interceptors/error-toast.interceptor';
@@ -53,7 +53,7 @@ import { IdentityInterceptor } from '@app/root/interceptors/identity.interceptor
 		HttpClientModule,
 	],
 	providers: [
-		UserService,
+		IdentityService,
 		JwtService,
 		ToastService,
 		MatSnackBar,

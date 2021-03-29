@@ -14,9 +14,14 @@ export const selectSymbolList = createSelector(
 	selectSymbol,
 	(state: SymbolState) => state.symbols
 );
-export const selectSymbolDetails = createSelector(
+export const selectSymbolItem = createSelector(
 	selectSymbol,
-	(state: SymbolState) => state.symbolDetails
+	(state: SymbolState) => state.symbolItem
+);
+
+export const selectSymbolOverview = createSelector(
+	selectSymbol,
+	(state: SymbolState) => state.symbolOverview
 );
 
 export const selectSymbolChart = createSelector(

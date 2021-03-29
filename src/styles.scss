@@ -50,3 +50,19 @@ body {
 	height: 100%;
 	display: flex;
 }
+
+.nm {
+	margin: 0 !important;
+}
+
+.content {
+	padding: 16px;
+}
+
+.admin-options:hover {
+	cursor: pointer;
+}
+
+.admin-option:focus {
+	outline: 0;
+}

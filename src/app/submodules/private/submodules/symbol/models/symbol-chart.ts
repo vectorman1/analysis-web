@@ -10,11 +10,11 @@ export class SymbolChartRequest {
 	}
 }
 
-export class ChartValues {
-	date!: string;
+export class ChartDay {
 	values!: number[];
 }
 
 export class SymbolChart {
-	value!: ChartValues[];
+	dates!: string[];
+	chartDays!: ChartDay[];
 }

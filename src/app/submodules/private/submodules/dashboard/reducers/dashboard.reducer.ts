@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { ServerItem } from '@app/root/models/server-item.model';
-import { TradingSymbol } from '@app/submodules/symbol/models/tradingSymbol';
+import { TradingSymbol } from '@app/submodules/symbol/models/trading-symbol';
 import { PagedList } from '@app/root/models/paged-list';
 import {
 	serverCallFailure,

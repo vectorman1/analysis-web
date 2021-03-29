@@ -11,7 +11,7 @@ import {
 	serverCallStart,
 	serverCallSuccess,
 } from '@app/root/server-calls.helpers';
-import { User } from '@app/public/submodules/user/models/user';
+import { TokenUser } from '@app/public/submodules/user/models/tokenUser';
 import {
 	userLogout,
 	userLogoutFailure,
@@ -26,7 +26,7 @@ import {
 export const userFeatureKey = 'user';
 
 export interface IdentityState {
-	identity: ServerItem<User>;
+	identity: ServerItem<TokenUser>;
 }
 
 export const initialState: IdentityState = {

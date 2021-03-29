@@ -5,14 +5,15 @@ import { PagedRequest } from '@app/shared/models/request';
 import {
 	TradingSymbol,
 	TradingSymbols,
-} from '@app/submodules/symbol/models/tradingSymbol';
+} from '@app/submodules/symbol/models/trading-symbol';
 import { API_ROUTES } from '@app/root/constants/route.constants';
 import { PagedList } from '@app/root/models/paged-list';
-import { SymbolDetails } from '@app/submodules/symbol/models/symbol-details';
 import {
 	SymbolChartRequest,
 	SymbolChart,
 } from '@app/submodules/symbol/models/symbol-chart';
+import { SymbolRequest } from '@app/submodules/symbol/models/symbol-request';
+import { SymbolOverview } from '@app/submodules/symbol/models/symbol-overview';
 
 @Injectable({
 	providedIn: 'root',
@@ -29,8 +30,8 @@ export class SymbolService {
 		);
 	}
 
-	getDetails(uuid: string): Observable<SymbolDetails> {
-		return this.http.get<SymbolDetails>(API_ROUTES.SYMBOL.DETAILS(uuid));
+	getOverview(uuid: string): Observable<SymbolOverview> {
+		return this.http.get<SymbolOverview>(API_ROUTES.SYMBOL.OVERVIEW(uuid));
 	}
 
 	getChart(req: SymbolChartRequest): Observable<SymbolChart> {
@@ -38,5 +39,9 @@ export class SymbolService {
 			API_ROUTES.HISTORIES.CHART(req.uuid),
 			req
 		);
+	}
+
+	get(uuid: string): Observable<TradingSymbol> {
+		return this.http.get<TradingSymbol>(API_ROUTES.SYMBOL.ITEM(uuid));
 	}
 }

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from '@app/public/submodules/user/models/user';
+import { TokenUser } from '@app/public/submodules/user/models/tokenUser';
 import { ServerError } from '@app/shared/models/server-error';
 import { RegisterRequest } from '@app/public/submodules/user/models/register-request';
 
@@ -14,7 +14,7 @@ export const userRegister = createAction(
 
 export const userRegisterSuccess = createAction(
 	USER_REGISTER_SUCCESS,
-	props<User>()
+	props<TokenUser>()
 );
 
 export const userRegisterFailure = createAction(

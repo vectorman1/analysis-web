@@ -7,8 +7,6 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { environment } from '@env/environment';
-import { ToastService } from '@app/shared/services/toast.service';
 import { AppState } from '@app/root/reducers';
 import { Store } from '@ngrx/store';
 import { toastError } from '@app/root/actions/toast.actions';

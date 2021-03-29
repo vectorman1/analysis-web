@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { userLoginSuccess } from '@app/public/submodules/user/actions/user-login.actions';
-import { UserService } from '@app/public/submodules/user/services/user.service';
+import { IdentityService } from '@app/public/submodules/user/services/identity.service';
 import { JwtService } from '@app/public/submodules/user/services/jwt.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/root/reducers';
@@ -15,7 +15,7 @@ import { AppState } from '@app/root/reducers';
 })
 export class UserComponent implements OnInit {
 	constructor(
-		private userService: UserService,
+		private userService: IdentityService,
 		private jwtService: JwtService,
 		private store: Store<AppState>
 	) {}

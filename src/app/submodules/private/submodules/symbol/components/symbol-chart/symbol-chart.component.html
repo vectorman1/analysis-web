@@ -1,0 +1,84 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" fxFlexFill>
+	<div fxFlex="90" fxFlexFill fxLayoutAlign="space-around center">
+		<mat-spinner *ngIf="(isLoading$ | async)"></mat-spinner>
+		<div *ngIf="(isSuccess$ | async)" fxFlexFill style="height: 100%" echarts [options]="priceActionChartOptions">
+		</div>
+	</div>
+	<div fxFlex fxFlexFill>
+		<ng-scrollbar>
+			<mat-list dense>
+				<mat-expansion-panel [class.mat-elevation-z0]="true" dense fxFlexFill>
+					<mat-expansion-panel-header>
+						<mat-panel-title>
+							Time range
+						</mat-panel-title>
+					</mat-expansion-panel-header>
+					<mat-radio-group
+						[(ngModel)]="chartTimeRange"
+						(change)="onTimeRangeChange()"
+						fxLayout="column"
+						fxLayoutGap="8px">
+						<mat-radio-button *ngFor="let range of chartTimeRanges" [value]="range" [checked]="range.checked" >
+							{{ range.text }}
+						</mat-radio-button>
+					</mat-radio-group>
+				</mat-expansion-panel>
+				<mat-expansion-panel [class.mat-elevation-z0]="true" dense fxFlexFill>
+					<mat-expansion-panel-header>
+						<mat-panel-title>
+							Indicators
+						</mat-panel-title>
+					</mat-expansion-panel-header>
+					<mat-expansion-panel [class.mat-elevation-z0]="true" dense fxFlexFill>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								EMA
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+						<mat-checkbox>
+							EMA10
+						</mat-checkbox>
+						<mat-checkbox>
+							EMA20
+						</mat-checkbox>
+						<mat-checkbox>
+							EMA30
+						</mat-checkbox>
+						<mat-checkbox>
+							EMA60
+						</mat-checkbox>
+						<mat-checkbox>
+							EMA120
+						</mat-checkbox>
+					</mat-expansion-panel>
+					<mat-expansion-panel [class.mat-elevation-z0]="true" dense fxFlexFill>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								MA
+							</mat-panel-title>
+						</mat-expansion-panel-header>
+						<mat-checkbox>
+							MA10
+						</mat-checkbox>
+						<mat-checkbox>
+							MA20
+						</mat-checkbox>
+
+						<mat-checkbox>
+							MA30
+						</mat-checkbox>
+						<mat-checkbox>
+							MA60
+						</mat-checkbox>
+						<mat-checkbox>
+							MA120
+						</mat-checkbox>
+					</mat-expansion-panel>
+					<div class="apply-indicators">
+						<button mat-stroked-button color="accent">Apply</button>
+					</div>
+				</mat-expansion-panel>
+			</mat-list>
+		</ng-scrollbar>
+	</div>
+</div>

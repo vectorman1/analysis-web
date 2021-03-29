@@ -6,11 +6,11 @@ import {
 	HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UserService } from '@app/public/submodules/user/services/user.service';
+import { IdentityService } from '@app/public/submodules/user/services/identity.service';
 
 @Injectable()
 export class IdentityInterceptor implements HttpInterceptor {
-	constructor(private userService: UserService) {}
+	constructor(private userService: IdentityService) {}
 
 	intercept(
 		req: HttpRequest<any>,

@@ -12,7 +12,7 @@ const routes: Routes = [
 		children: [
 			{
 				path: '',
-				redirectTo: PRIVATE_ROUTES.DASHBOARD.BASE,
+				redirectTo: PRIVATE_ROUTES.SYMBOL.BASE,
 				pathMatch: 'full',
 			},
 			{
@@ -27,6 +27,13 @@ const routes: Routes = [
 				loadChildren: () =>
 					import('./submodules/symbol/symbol.module').then(
 						(m) => m.SymbolModule
+					),
+			},
+			{
+				path: PRIVATE_ROUTES.ADMIN.BASE,
+				loadChildren: () =>
+					import('./submodules/admin/admin.module').then(
+						(m) => m.AdminModule
 					),
 			},
 		],
