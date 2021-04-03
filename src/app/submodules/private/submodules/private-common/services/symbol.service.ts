@@ -9,15 +9,13 @@ import {
 import { API_ROUTES } from '@app/root/constants/route.constants';
 import { PagedList } from '@app/root/models/paged-list';
 import {
-	SymbolChartRequest,
-	SymbolChart,
-} from '@app/submodules/symbol/models/symbol-chart';
+	HistoryChartRequest,
+	HistoryChart,
+} from '@app/submodules/private-common/models/history-chart';
 import { SymbolRequest } from '@app/submodules/symbol/models/symbol-request';
 import { SymbolOverview } from '@app/submodules/symbol/models/symbol-overview';
 
-@Injectable({
-	providedIn: 'root',
-})
+@Injectable()
 export class SymbolService {
 	constructor(private http: HttpClient) {}
 
@@ -25,23 +23,27 @@ export class SymbolService {
 		const body = JSON.stringify(req);
 
 		return this.http.post<PagedList<TradingSymbol>>(
-			API_ROUTES.SYMBOL.PAGED,
+			API_ROUTES.SYMBOLS.PAGED,
 			body
 		);
 	}
 
 	getOverview(uuid: string): Observable<SymbolOverview> {
-		return this.http.get<SymbolOverview>(API_ROUTES.SYMBOL.OVERVIEW(uuid));
+		return this.http.get<SymbolOverview>(API_ROUTES.SYMBOLS.OVERVIEW(uuid));
 	}
 
-	getChart(req: SymbolChartRequest): Observable<SymbolChart> {
-		return this.http.post<SymbolChart>(
+	getChart(req: HistoryChartRequest): Observable<HistoryChart> {
+		return this.http.post<HistoryChart>(
 			API_ROUTES.HISTORIES.CHART(req.uuid),
 			req
 		);
 	}
 
 	get(uuid: string): Observable<TradingSymbol> {
-		return this.http.get<TradingSymbol>(API_ROUTES.SYMBOL.ITEM(uuid));
+		return this.http.get<TradingSymbol>(API_ROUTES.SYMBOLS.ITEM(uuid));
+	}
+
+	update(): Observable<any> {
+		return this.http.post<any>(API_ROUTES.SYMBOLS.UPDATE_ALL, {});
 	}
 }

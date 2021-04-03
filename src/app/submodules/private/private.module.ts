@@ -11,11 +11,13 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { FlexModule } from '@angular/flex-layout';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { AppIdentityRequirementDirective } from './directives/app-identity-requirement.directive';
+import { PrivateCommonModule } from '@app/submodules/private-common/private-common.module';
 
 @NgModule({
 	declarations: [PrivateComponent, AppIdentityRequirementDirective],
 	imports: [
 		PrivateRoutingModule,
+		PrivateCommonModule,
 		MatSidenavModule,
 		MatToolbarModule,
 		CommonModule,
