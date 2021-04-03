@@ -6,10 +6,11 @@ export const API_ROUTES = {
 	DASHBOARD: {
 		HOME: setRoute('aggregate'), // TODO Pass request params for aggregate
 	},
-	SYMBOL: {
+	SYMBOLS: {
 		ITEM: (uuid: string) => setRoute(`symbols/${uuid}`),
 		PAGED: setRoute('symbols/paged'),
 		OVERVIEW: (uuid: string) => setRoute(`symbols/${uuid}/overview`),
+		UPDATE_ALL: setRoute('symbols/updateAll'),
 	},
 	USER: {
 		BASE: setRoute('users'),
@@ -20,6 +21,7 @@ export const API_ROUTES = {
 	},
 	HISTORIES: {
 		CHART: (uuid: string) => setRoute(`histories/${uuid}/chart`),
+		UPDATE: setRoute('histories/update'),
 	},
 };
 
@@ -42,6 +44,12 @@ export const PRIVATE_ROUTES = {
 			LIST: `list`,
 			CREATE: `create`,
 			EDIT: `:uuid/details`,
+		},
+		SYMBOL: {
+			BASE: 'symbol',
+		},
+		HISTORY: {
+			BASE: 'history',
 		},
 	},
 };
