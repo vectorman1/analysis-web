@@ -1,30 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { TradingSymbolsListDataSource } from './trading-symbols-list-data-source';
-import { Store } from '@ngrx/store';
-import { TradingSymbol } from '@app/submodules/symbol/models/trading-symbol';
-
-import { merge, Subscription } from 'rxjs';
-import {
-	exhaustMap,
-	filter,
-	map,
-	mergeMap,
-	subscribeOn,
-	switchMap,
-	tap,
-} from 'rxjs/operators';
 import { symbolsGetPaged } from '@app/submodules/symbol/actions/symbol-get-paged.actions';
-import { SymbolState } from '@app/submodules/symbol/reducers/symbol.reducer';
-import { AppState } from '@app/root/reducers';
 import { PagedRequest } from '@app/shared/models/request';
-import { isNullOrUndefined } from '@app/root/utils';
-import { PagedTableConfig } from '@app/shared/models/paged-table-config';
+import { PagedTableConfig } from '@app/submodules/private-common/models/paged-table-config';
 import { selectSymbolList } from '@app/submodules/symbol/selectors/symbol.selectors';
-import { PagedTableDatasource } from '@app/shared/components/paged-table/paged-table.datasource';
-import { PagedTableComponent } from '@app/shared/components/paged-table/paged-table.component';
+import { PagedTableComponent } from '@app/private/submodules/private-common/components/paged-table/paged-table.component';
 
 @Component({
 	selector: 'app-symbols-list',
@@ -37,7 +16,6 @@ import { PagedTableComponent } from '@app/shared/components/paged-table/paged-ta
 export class SymbolsListComponent implements AfterViewInit, OnInit {
 	@ViewChild(PagedTableComponent) table!: PagedTableComponent;
 
-	dataSource!: PagedTableDatasource;
 	req!: PagedRequest;
 	searchString!: string;
 	tableConfig: PagedTableConfig;
@@ -61,7 +39,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 					name: 'identifier',
 					displayName: 'Identifier',
 					width: '5%',
-					isLink: false,
+					isLink: true,
 					routerLink: ['/private/symbol', 'details'],
 				},
 				{
@@ -74,7 +52,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 				{
 					name: 'currencyCode',
 					displayName: 'Currency Code',
-					width: '5%',
+					width: '10%',
 					isLink: false,
 					routerLink: [],
 				},
@@ -102,7 +80,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 				{
 					name: 'createdAt',
 					displayName: 'Created At',
-					width: '30%',
+					width: '25%',
 					isLink: false,
 					routerLink: [],
 				},
