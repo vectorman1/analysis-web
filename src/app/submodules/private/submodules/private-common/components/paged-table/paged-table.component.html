@@ -1,5 +1,6 @@
 <ng-scrollbar appearance="compact">
 	<table
+		[hidden]="!dataSource"
 		mat-table
 		matSort
 		aria-label="Elements"
@@ -24,7 +25,11 @@
 			</th>
 			<td mat-cell *matCellDef="let row">
 				<a *ngIf="column.isLink"
-				   href="#"
+				   [routerLink]="[
+				   		column.routerLink[0],
+				   		row.uuid,
+				   		column.routerLink[1],
+				   ]"
 				   mat-button
 				>{{ row[column.name] }}
 				</a>

@@ -1,4 +1,4 @@
-import { ColumnConfig } from '@app/shared/models/column-config';
+import { ColumnConfig } from '@app/submodules/private-common/models/column-config';
 import { Input } from '@angular/core';
 import { SortDirection } from '@angular/material/sort';
 

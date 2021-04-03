@@ -2,6 +2,7 @@ import {
 	AfterViewInit,
 	Component,
 	Input,
+	OnDestroy,
 	OnInit,
 	ViewChild,
 } from '@angular/core';
@@ -11,23 +12,22 @@ import { MatTable } from '@angular/material/table';
 import { PagedRequest } from '@app/shared/models/request';
 import { AppState } from '@app/root/reducers';
 import { Store } from '@ngrx/store';
-import { PagedTableDatasource } from '@app/shared/components/paged-table/paged-table.datasource';
+import { PagedTableDatasource } from '@app/submodules/private-common/components/paged-table/paged-table.datasource';
 import { merge, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { PagedTableConfig } from '@app/shared/models/paged-table-config';
-import { mapIsLoading, mapValue } from '@app/root/observable.helpers';
+import { PagedTableConfig } from '@app/submodules/private-common/models/paged-table-config';
 
 @Component({
 	selector: 'app-paged-table',
 	templateUrl: './paged-table.component.html',
 	styleUrls: ['./paged-table.component.scss'],
 })
-export class PagedTableComponent implements OnInit, AfterViewInit {
+export class PagedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 	dataSource!: PagedTableDatasource;
 	@Input() config!: PagedTableConfig;
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
-	@ViewChild(MatSort) sort: MatSort = new MatSort();
+	@ViewChild(MatSort) sort!: MatSort;
 	@ViewChild(MatTable) table!: MatTable<any>;
 
 	subscriptions = Array<Subscription>();
@@ -52,7 +52,11 @@ export class PagedTableComponent implements OnInit, AfterViewInit {
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
 
-		this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+		this.subscriptions.push(
+			this.dataSource.sort.sortChange.subscribe(
+				() => (this.paginator.pageIndex = 0)
+			)
+		);
 
 		merge(this.sort.sortChange, this.paginator.page)
 			.pipe(
@@ -77,5 +81,9 @@ export class PagedTableComponent implements OnInit, AfterViewInit {
 		};
 
 		this.dataSource.loadItems(this.req);
+	}
+
+	ngOnDestroy(): void {
+		this.subscriptions.forEach((s) => s.unsubscribe());
 	}
 }

@@ -1,4 +1,4 @@
-export class SymbolChartRequest {
+export class HistoryChartRequest {
 	startDate: string;
 	endDate: string;
 	uuid: string;
@@ -14,7 +14,7 @@ export class ChartDay {
 	values!: number[];
 }
 
-export class SymbolChart {
+export class HistoryChart {
 	dates!: string[];
 	chartDays!: ChartDay[];
 }
