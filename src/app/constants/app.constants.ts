@@ -77,4 +77,5 @@ export const APP_CONSTANTS = {
 			'min-width': '120px',
 		},
 	},
+	TOAST_SERVER_ERRORS: [400, 404],
 };
