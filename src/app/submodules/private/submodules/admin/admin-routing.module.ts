@@ -23,6 +23,13 @@ const routes: Routes = [
 						(m) => m.AdminUserModule
 					),
 			},
+			{
+				path: PRIVATE_ROUTES.ADMIN.SYMBOL.BASE,
+				loadChildren: () =>
+					import(
+						'./submodules/admin-symbol/admin-symbol.module'
+					).then((m) => m.AdminSymbolModule),
+			},
 		],
 	},
 ];

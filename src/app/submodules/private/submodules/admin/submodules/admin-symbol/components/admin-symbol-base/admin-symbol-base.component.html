@@ -1,1 +1,15 @@
-<p>admin-symbol-base works!</p>
+<div fxLayout="row">
+	<div fxFlex="50">
+		Update symbol data
+	</div>
+	<div fxFlex="50">
+		<button
+			mat-raised-button
+			color="accent"
+			(click)="updateSymbols()"
+			[loading]="(isUpdateLoading | async)"
+		>
+			Update &nbsp;
+		</button>
+	</div>
+</div>
