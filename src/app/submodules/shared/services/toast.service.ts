@@ -7,33 +7,29 @@ import { environment } from '@env/environment';
 
 @Injectable()
 export class ToastService {
-	constructor(private snackbar: MatSnackBar) {}
-	openErrorToast(err: any) {
-		let config = {
-			horizontalPosition: 'right',
-			verticalPosition: 'top',
-			politeness: 'assertive',
-			duration: APP_CONSTANTS.TOAST_DURATION_MS,
-			panelClass: ['error-toast'],
-		} as MatSnackBarConfig;
+	errorConfig: MatSnackBarConfig = {
+		horizontalPosition: 'right',
+		verticalPosition: 'top',
+		politeness: 'assertive',
+		duration: APP_CONSTANTS.TOAST_DURATION_MS,
+		panelClass: ['error-toast'],
+	};
 
-		switch (err.status) {
-			case 400:
-				this.snackbar.open(err.error.message, '', config);
-				return;
-			default:
-				if (!environment.production) {
-					this.snackbar.open(err.message, '', config);
-				}
-		}
+	successConfig: MatSnackBarConfig = {
+		horizontalPosition: 'right',
+		verticalPosition: 'top',
+		politeness: 'assertive',
+		duration: APP_CONSTANTS.TOAST_DURATION_MS,
+		panelClass: ['success-toast'],
+	};
+
+	constructor(private snackbar: MatSnackBar) {}
+
+	openErrorToast(err: any) {
+		this.snackbar.open(err.error.message, '', this.errorConfig);
 	}
+
 	openSuccessToast(t: any) {
-		this.snackbar.open(t.message, '', {
-			horizontalPosition: 'right',
-			verticalPosition: 'top',
-			politeness: 'assertive',
-			duration: APP_CONSTANTS.TOAST_DURATION_MS,
-			panelClass: ['success-toast'],
-		});
+		this.snackbar.open(t.message, '', this.successConfig);
 	}
 }
