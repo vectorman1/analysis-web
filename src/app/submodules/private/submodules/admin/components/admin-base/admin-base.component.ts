@@ -29,7 +29,7 @@ export class AdminBaseComponent implements OnInit {
 				isMatIcon: true,
 				title: 'History',
 				subtitle: 'Manage symbol histories',
-				route: './histories',
+				route: './history',
 			},
 		],
 		[
@@ -39,7 +39,7 @@ export class AdminBaseComponent implements OnInit {
 				isMatIcon: false,
 				title: 'Symbols',
 				subtitle: 'Manage symbols data',
-				route: './symbols',
+				route: './symbol',
 			},
 		],
 	];

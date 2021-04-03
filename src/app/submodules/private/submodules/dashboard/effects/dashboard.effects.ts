@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { SymbolService } from '@app/submodules/symbol/services/symbol.service';
+import { SymbolService } from '@app/submodules/private-common/services/symbol.service';
 import {
 	dashboardGetNewestSymbols,
 	dashboardGetNewestSymbolsSuccess,
