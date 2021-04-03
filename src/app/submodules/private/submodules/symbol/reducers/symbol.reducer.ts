@@ -18,7 +18,7 @@ import {
 	symbolsGetOverviewReset,
 	symbolsGetOverviewSuccess,
 } from '@app/submodules/symbol/actions/symbol-get-overview.actions';
-import { SymbolChart } from '@app/submodules/symbol/models/symbol-chart';
+import { HistoryChart } from '@app/submodules/private-common/models/history-chart';
 import {
 	symbolsGetChartFailure,
 	symbolsGetChartReset,
@@ -39,7 +39,7 @@ export interface SymbolState {
 	symbols: ServerItem<PagedList<TradingSymbol>>;
 	symbolItem: ServerItem<TradingSymbol>;
 	symbolOverview: ServerItem<SymbolOverview>;
-	symbolChart: ServerItem<SymbolChart>;
+	symbolChart: ServerItem<HistoryChart>;
 }
 
 export const initialState: SymbolState = <SymbolState>{};

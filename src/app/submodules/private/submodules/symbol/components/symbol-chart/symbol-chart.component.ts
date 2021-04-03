@@ -13,9 +13,9 @@ import {
 } from '@app/root/observable.helpers';
 import { filter } from 'rxjs/operators';
 import {
-	SymbolChart,
-	SymbolChartRequest,
-} from '@app/submodules/symbol/models/symbol-chart';
+	HistoryChart,
+	HistoryChartRequest,
+} from '@app/submodules/private-common/models/history-chart';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ServerItem } from '@app/root/models/server-item.model';
 import { NgxEchartsDirective } from 'ngx-echarts';
@@ -23,7 +23,7 @@ import { selectSymbolChart } from '@app/submodules/symbol/selectors/symbol.selec
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/root/reducers';
 import { APP_CONSTANTS } from '@app/root/constants/app.constants';
-import { ChartTimeRange } from '@app/submodules/symbol/models/chart-time-range';
+import { ChartTimeRange } from '@app/submodules/private-common/models/chart-time-range';
 import {
 	symbolsGetChart,
 	symbolsGetChartReset,
@@ -39,7 +39,7 @@ export class SymbolChartComponent implements OnInit, AfterViewInit {
 	@ViewChild(NgxEchartsDirective) chart!: NgxEchartsDirective;
 
 	subscriptions = Array<Subscription>();
-	symbolChart$: Observable<ServerItem<SymbolChart>>;
+	symbolChart$: Observable<ServerItem<HistoryChart>>;
 	isLoading$ = new BehaviorSubject<boolean>(true);
 	isSuccess$ = new BehaviorSubject<boolean>(false);
 
@@ -56,7 +56,7 @@ export class SymbolChartComponent implements OnInit, AfterViewInit {
 			this.symbolChart$
 				.pipe(mapValue)
 				.pipe(filter((c) => !!c))
-				.subscribe((chart: SymbolChart) => {
+				.subscribe((chart: HistoryChart) => {
 					let values = chart.chartDays.map((v) => v.values);
 					this.initChart(chart.dates, values);
 				}),
@@ -135,7 +135,7 @@ export class SymbolChartComponent implements OnInit, AfterViewInit {
 	ngAfterViewInit(): void {
 		this.store.dispatch(
 			symbolsGetChart(
-				new SymbolChartRequest(
+				new HistoryChartRequest(
 					this.chartTimeRange.time.toISOString(),
 					new Date().toISOString(),
 					this.symbolUuid
@@ -147,7 +147,7 @@ export class SymbolChartComponent implements OnInit, AfterViewInit {
 	onTimeRangeChange() {
 		this.store.dispatch(
 			symbolsGetChart(
-				new SymbolChartRequest(
+				new HistoryChartRequest(
 					this.chartTimeRange.time.toISOString(),
 					new Date().toISOString(),
 					this.symbolUuid
