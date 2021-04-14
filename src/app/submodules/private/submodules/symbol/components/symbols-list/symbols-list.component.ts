@@ -4,6 +4,7 @@ import { PagedRequest } from '@app/shared/models/request';
 import { PagedTableConfig } from '@app/submodules/private-common/models/paged-table-config';
 import { selectSymbolList } from '@app/submodules/symbol/selectors/symbol.selectors';
 import { PagedTableComponent } from '@app/private/submodules/private-common/components/paged-table/paged-table.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
 	selector: 'app-symbols-list',
@@ -34,6 +35,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 					width: '10%',
 					isLink: false,
 					routerLink: [],
+					pipe: null,
 				},
 				{
 					name: 'identifier',
@@ -41,6 +43,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 					width: '5%',
 					isLink: true,
 					routerLink: ['/private/symbol', 'details'],
+					pipe: null,
 				},
 				{
 					name: 'name',
@@ -48,6 +51,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 					width: '25%',
 					isLink: false,
 					routerLink: [],
+					pipe: null,
 				},
 				{
 					name: 'currencyCode',
@@ -55,6 +59,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 					width: '10%',
 					isLink: false,
 					routerLink: [],
+					pipe: null,
 				},
 				{
 					name: 'minimumOrderQuantity',
@@ -62,6 +67,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 					width: '10%',
 					isLink: false,
 					routerLink: [],
+					pipe: null,
 				},
 				{
 					name: 'marketName',
@@ -69,6 +75,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 					width: '15%',
 					isLink: false,
 					routerLink: [],
+					pipe: null,
 				},
 				{
 					name: 'marketHoursGmt',
@@ -76,6 +83,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 					width: '10%',
 					isLink: false,
 					routerLink: [],
+					pipe: null,
 				},
 				{
 					name: 'createdAt',
@@ -83,6 +91,7 @@ export class SymbolsListComponent implements AfterViewInit, OnInit {
 					width: '25%',
 					isLink: false,
 					routerLink: [],
+					pipe: DatePipe,
 				},
 			],
 		};

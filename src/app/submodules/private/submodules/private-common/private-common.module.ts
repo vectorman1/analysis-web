@@ -10,6 +10,7 @@ import { SymbolService } from '@app/submodules/private-common/services/symbol.se
 import { HistoryService } from '@app/submodules/private-common/services/history.service';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
 	declarations: [PagedTableComponent],
@@ -22,6 +23,7 @@ import { RouterModule } from '@angular/router';
 		NgScrollbarModule,
 		MatButtonModule,
 		RouterModule,
+		FlexModule,
 	],
 	providers: [SymbolService, HistoryService],
 	exports: [PagedTableComponent],

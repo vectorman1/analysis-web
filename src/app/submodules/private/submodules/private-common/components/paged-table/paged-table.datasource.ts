@@ -79,6 +79,7 @@ export class PagedTableDatasource extends DataSource<any> {
 	}
 
 	loadItems(req: PagedRequest) {
+		this.itemsSubject.next([]);
 		this.store.dispatch(this.loadAction(req));
 	}
 }

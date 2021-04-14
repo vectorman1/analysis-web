@@ -4,4 +4,5 @@ export interface ColumnConfig {
 	width: string;
 	isLink: boolean;
 	routerLink: any[];
+	pipe: any;
 }

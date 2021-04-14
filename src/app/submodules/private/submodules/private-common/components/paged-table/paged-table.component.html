@@ -1,63 +1,67 @@
-<ng-scrollbar appearance="compact">
-	<table
-		[hidden]="!dataSource"
-		mat-table
-		matSort
-		aria-label="Elements"
-		[dataSource]="dataSource"
-		class="table symbols-list-table"
-		matSortDisableClear
-		[matSortActive]="config.initialSort"
-		[matSortDirection]="config.initialDirection"
-		[width]="'100%'"
-	>
-		<ng-container *ngFor="let column of config.columns;" [matColumnDef]="column.name">
-			<th
-				mat-header-cell
-				*matHeaderCellDef
-				[mat-sort-header]="column.name"
-				[width]="column.width"
-				[disabled]="
+<div fxFlexFill fxLayout="column">
+	<ng-scrollbar appearance="compact">
+		<table
+			mat-table
+			matSort
+			matSortDisableClear
+			aria-label="Elements"
+			class="table symbols-list-table"
+			[hidden]="!dataSource"
+			[dataSource]="dataSource"
+			[matSortActive]="config.initialSort"
+			[matSortDirection]="config.initialDirection"
+			[width]="'100%'"
+		>
+			<ng-container *ngFor="let column of config.columns;" [matColumnDef]="column.name">
+				<th
+					mat-header-cell
+					*matHeaderCellDef
+					[mat-sort-header]="column.name"
+					[width]="column.width"
+					[disabled]="
 					dataSource?.getIsLoading() | async
 				"
-			>
-				{{column.displayName}}
-			</th>
-			<td mat-cell *matCellDef="let row">
-				<a *ngIf="column.isLink"
-				   [routerLink]="[
+				>
+					{{column.displayName}}
+				</th>
+				<td mat-cell *matCellDef="let row">
+					<a *ngIf="column.isLink"
+					   [routerLink]="[
 				   		column.routerLink[0],
 				   		row.uuid,
 				   		column.routerLink[1],
 				   ]"
-				   mat-button
-				>{{ row[column.name] }}
-				</a>
-				<span *ngIf="!column.isLink">
+					   mat-button
+					>{{ row[column.name] }}
+					</a>
+					<span *ngIf="!column.isLink && !column.pipe">
 					{{ row[column.name] }}
 				</span>
-			</td>
-		</ng-container>
 
-
+					<span *ngIf="!column.isLink && column.pipe">
+					{{ row[column.name] | date }}
+				</span>
+				</td>
+			</ng-container>
+			<tr
+				mat-header-row
+				*matHeaderRowDef="displayedColumns; sticky: true"
+			></tr>
 			<tr
 				mat-row
-				*matRowDef="let row; columns: displayedColumns"
+				*matRowDef="let row; columns: displayedColumns;"
 			></tr>
-		<tr
-			mat-header-row
-			*matHeaderRowDef="displayedColumns; sticky: true"
-		></tr>
-	</table>
+		</table>
+		<div
+			fxFlexFill
+			fxLayout="column"
+			fxLayoutAlign="center center"
+			*ngIf="dataSource?.getIsLoading() | async"
+		>
+			<mat-spinner></mat-spinner>
+		</div>
+	</ng-scrollbar>
 
-	<div
-		class="spinner-container"
-		*ngIf="dataSource?.getIsLoading() | async"
-	>
-		<mat-spinner></mat-spinner>
-	</div>
-</ng-scrollbar>
-<div class="table-paginator">
 	<mat-paginator
 		[disabled]="dataSource?.getIsLoading() | async"
 		[length]="dataSource?.getTotalItems() | async"

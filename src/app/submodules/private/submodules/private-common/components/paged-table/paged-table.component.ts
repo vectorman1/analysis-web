@@ -20,11 +20,11 @@ import { PagedTableConfig } from '@app/submodules/private-common/models/paged-ta
 @Component({
 	selector: 'app-paged-table',
 	templateUrl: './paged-table.component.html',
-	styleUrls: ['./paged-table.component.scss'],
 })
 export class PagedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 	dataSource!: PagedTableDatasource;
 	@Input() config!: PagedTableConfig;
+	@Input() term!: string;
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	@ViewChild(MatSort) sort!: MatSort;
@@ -33,7 +33,6 @@ export class PagedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 	subscriptions = Array<Subscription>();
 
 	req!: PagedRequest;
-	searchString!: string;
 	displayedColumns!: string[];
 
 	constructor(private store: Store<AppState>) {}
@@ -55,16 +54,15 @@ export class PagedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.subscriptions.push(
 			this.dataSource.sort.sortChange.subscribe(
 				() => (this.paginator.pageIndex = 0)
-			)
+			),
+			merge(this.sort.sortChange, this.paginator.page)
+				.pipe(
+					tap(() => {
+						this.loadItems();
+					})
+				)
+				.subscribe()
 		);
-
-		merge(this.sort.sortChange, this.paginator.page)
-			.pipe(
-				tap(() => {
-					this.loadItems();
-				})
-			)
-			.subscribe();
 
 		this.loadItems();
 	}
@@ -76,7 +74,7 @@ export class PagedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 				pageSize: this.paginator.pageSize,
 				order: this.sort.active,
 				ascending: this.sort.direction === 'asc',
-				text: this.searchString,
+				text: this.term,
 			},
 		};
 

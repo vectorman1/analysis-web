@@ -118,6 +118,7 @@ export class SymbolChartComponent implements OnInit, AfterViewInit {
 		this.priceActionChartOptions = {
 			...this.priceActionChartOptions,
 			xAxis: {
+				...this.priceActionChartOptions.xAxis,
 				data: dates,
 			},
 			series: [
@@ -154,5 +155,21 @@ export class SymbolChartComponent implements OnInit, AfterViewInit {
 				)
 			)
 		);
+	}
+
+	calculateMA(dayCount: number, data: any) {
+		let result = [];
+		for (let i = 0, len = data.values.length; i < len; i++) {
+			if (i < dayCount) {
+				result.push('-');
+				continue;
+			}
+			let sum = 0;
+			for (let j = 0; j < dayCount; j++) {
+				sum += data.values[i - j][1];
+			}
+			result.push(+(sum / dayCount).toFixed(3));
+		}
+		return result;
 	}
 }

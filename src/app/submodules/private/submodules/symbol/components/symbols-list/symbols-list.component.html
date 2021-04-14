@@ -8,13 +8,6 @@
 	<div fxLayout="row" fxFlex="5" fxLayoutAlign="start center">
 		<div fxLayout="column" fxFlex="15">
 			<div fxLayout="row" fxFlexFill fxLayoutAlign="start center">
-				<button
-					mat-icon-button
-					class="back-button"
-					[routerLink]="['/private']"
-				>
-					<mat-icon>arrow_back</mat-icon>
-				</button>
 				<h1 class="mat-h1 nm">Symbols</h1>
 			</div>
 		</div>
@@ -40,7 +33,7 @@
 				<h3 class="mat-h3">List</h3>
 				<mat-card-content>
 					<div class="table-card-content">
-						<app-paged-table [config]="tableConfig">
+						<app-paged-table [config]="tableConfig" [term]="searchString">
 						</app-paged-table>
 					</div>
 				</mat-card-content>
