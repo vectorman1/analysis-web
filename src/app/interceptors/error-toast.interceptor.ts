@@ -10,6 +10,7 @@ import { tap } from 'rxjs/operators';
 import { AppState } from '@app/root/reducers';
 import { Store } from '@ngrx/store';
 import { toastError } from '@app/root/actions/toast.actions';
+import { APP_CONSTANTS } from '@app/root/constants/app.constants';
 
 @Injectable()
 export class ErrorToastInterceptor implements HttpInterceptor {
@@ -26,7 +27,9 @@ export class ErrorToastInterceptor implements HttpInterceptor {
 			tap(
 				() => {},
 				(err: any) => {
-					if (err.status === 400) {
+					if (
+						APP_CONSTANTS.TOAST_SERVER_ERRORS.includes(err.status)
+					) {
 						this.openSnackBar(err);
 					}
 				}

@@ -24,7 +24,7 @@ import {
 	symbolsGetPagedFailure,
 	symbolsGetPagedSuccess,
 } from '@app/submodules/symbol/actions/symbol-get-paged.actions';
-import { SymbolService } from '@app/submodules/symbol/services/symbol.service';
+import { SymbolService } from '@app/submodules/private-common/services/symbol.service';
 import {
 	SYMBOLS_GET_CHART,
 	SYMBOLS_GET_CHART_FAILURE,
@@ -32,9 +32,9 @@ import {
 	symbolsGetChartSuccess,
 } from '@app/submodules/symbol/actions/symbol-get-chart.actions';
 import {
-	SymbolChartRequest,
-	SymbolChart,
-} from '@app/submodules/symbol/models/symbol-chart';
+	HistoryChartRequest,
+	HistoryChart,
+} from '@app/submodules/private-common/models/history-chart';
 import {
 	SYMBOLS_GET,
 	symbolsGetFailure,
@@ -42,6 +42,7 @@ import {
 } from '@app/submodules/symbol/actions/symbol-get.actions';
 import { SymbolRequest } from '@app/submodules/symbol/models/symbol-request';
 import { SymbolOverview } from '@app/submodules/symbol/models/symbol-overview';
+import { HistoryService } from '@app/submodules/private-common/services/history.service';
 
 @Injectable()
 export class SymbolEffects {
@@ -100,9 +101,9 @@ export class SymbolEffects {
 		this.actions$.pipe(
 			ofType(SYMBOLS_GET_CHART),
 			debounceTime(APP_CONSTANTS.REQUEST_DEBOUNCE_MS),
-			switchMap((req: SymbolChartRequest) =>
-				this.symbolsService.getChart(req).pipe(
-					map((response: SymbolChart) =>
+			switchMap((req: HistoryChartRequest) =>
+				this.historyService.getSymbolChart(req).pipe(
+					map((response: HistoryChart) =>
 						symbolsGetChartSuccess(response)
 					),
 					catchError((err: ServerError) =>
@@ -115,6 +116,7 @@ export class SymbolEffects {
 
 	constructor(
 		private actions$: Actions,
-		private symbolsService: SymbolService
+		private symbolsService: SymbolService,
+		private historyService: HistoryService
 	) {}
 }

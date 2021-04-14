@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { ServerError } from '@app/shared/models/server-error';
 import {
-	SymbolChart,
-	SymbolChartRequest,
-} from '@app/submodules/symbol/models/symbol-chart';
+	HistoryChart,
+	HistoryChartRequest,
+} from '@app/submodules/private-common/models/history-chart';
 
 export const SYMBOLS_GET_CHART = '[Symbols] Get Symbol Chart';
 export const SYMBOLS_GET_CHART_SUCCESS = '[Symbols] Get Symbol Chart Success';
@@ -12,12 +12,12 @@ export const SYMBOLS_GET_CHART_RESET = '[Symbols] Get Symbol Chart Reset';
 
 export const symbolsGetChart = createAction(
 	SYMBOLS_GET_CHART,
-	props<SymbolChartRequest>()
+	props<HistoryChartRequest>()
 );
 
 export const symbolsGetChartSuccess = createAction(
 	SYMBOLS_GET_CHART_SUCCESS,
-	props<SymbolChart>()
+	props<HistoryChart>()
 );
 
 export const symbolsGetChartFailure = createAction(

@@ -13,6 +13,9 @@ export const APP_CONSTANTS = {
 		xAxis: {},
 		yAxis: {
 			scale: true,
+			splitArea: {
+				show: true,
+			},
 		},
 		dataZoom: [
 			{
@@ -25,7 +28,7 @@ export const APP_CONSTANTS = {
 				show: true,
 				xAxisIndex: [0, 1],
 				type: 'slider',
-				top: '85%',
+				bottom: '2%',
 				start: 20,
 				end: 100,
 			},
@@ -43,6 +46,21 @@ export const APP_CONSTANTS = {
 				color: '#000000',
 			},
 			// extraCssText: 'width: 170px'
+		},
+		visualMap: {
+			show: true,
+			seriesIndex: 5,
+			dimension: 2,
+			pieces: [
+				{
+					value: 1,
+					color: '#00da3c',
+				},
+				{
+					value: -1,
+					color: '#ec0000',
+				},
+			],
 		},
 	} as EChartsOption,
 	MS_PER_MINUTE: 60000,
@@ -77,4 +95,5 @@ export const APP_CONSTANTS = {
 			'min-width': '120px',
 		},
 	},
+	TOAST_SERVER_ERRORS: [400, 404],
 };
